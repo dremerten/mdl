@@ -123,7 +123,7 @@ class _Database(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1047)
+            database.add(record, 1000)
 
         # Insert DeviceModel
         if db_devicemodel.idx_devicemodel_exists(1) is False:
@@ -132,7 +132,7 @@ class _Database(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1047)
+            database.add(record, 1001)
 
         # Insert Route
         if db_route.idx_route_exists(1) is False:
@@ -141,7 +141,7 @@ class _Database(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1047)
+            database.add(record, 1002)
 
         # Insert Rider
         if db_rider.idx_rider_exists(1) is False:
@@ -152,7 +152,7 @@ class _Database(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1047)
+            database.add(record, 1003)
 
         # Insert DriverCompany
         if db_drivercompany.idx_drivercompany_exists(1) is False:
@@ -161,7 +161,7 @@ class _Database(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1047)
+            database.add(record, 1004)
 
         # Insert Driver
         if db_driver.idx_driver_exists(1) is False:
@@ -172,7 +172,7 @@ class _Database(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1047)
+            database.add(record, 1005)
 
         # Insert RiderDevice
         if db_riderdevice.idx_riderdevice_exists(1) is False:
@@ -182,7 +182,7 @@ class _Database(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1047)
+            database.add(record, 1006)
 
         # Insert DriverDevice
         if db_driverdevice.idx_driverdevice_exists(1) is False:
@@ -192,7 +192,7 @@ class _Database(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1047)
+            database.add(record, 1007)
 
 
 class _Configuration(object):
