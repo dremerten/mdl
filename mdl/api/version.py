@@ -1,0 +1,22 @@
+"""mdl database API. Get Version."""
+
+# Flask imports
+from flask import Blueprint
+
+# Define the VERSION global variable
+VERSION = Blueprint('VERSION', __name__)
+
+
+@VERSION.route('/')
+def index():
+    """Function for handling home route.
+
+    Args:
+        None
+
+    Returns:
+        Home Page
+
+    """
+    # Return
+    return 'mdl mobile API v1.0 Operational.\n'
