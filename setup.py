@@ -28,8 +28,8 @@ except:
     sys.exit(2)
 from mdl.utils import configuration
 from mdl.utils import general
-from mdl.db.db_orm import BASE, DeviceMake, DeviceModel, Route, Rider, Driver
-from mdl.db.db_orm import DriverCompany, RiderDevice, DriverDevice
+from mdl.db.db_orm import BASE, DeviceMakes, DeviceModels, Routes, Riders
+from mdl.db.db_orm import DriverCompanies, RiderDevices, DriverDevices, Drivers
 from mdl.db import URL, db
 from mdl.db import db_devicemake
 from mdl.db import db_devicemodel
@@ -118,7 +118,7 @@ class _Database(object):
         """
         # Insert DeviceMake
         if db_devicemake.idx_devicemake_exists(1) is False:
-            record = DeviceMake(
+            record = DeviceMakes(
                 make_name=general.encode(self.reserved),
                 enabled=0
             )
@@ -127,7 +127,7 @@ class _Database(object):
 
         # Insert DeviceModel
         if db_devicemodel.idx_devicemodel_exists(1) is False:
-            record = DeviceModel(
+            record = DeviceModels(
                 model_name=general.encode(self.reserved),
                 enabled=0
             )
@@ -136,7 +136,7 @@ class _Database(object):
 
         # Insert Route
         if db_route.idx_route_exists(1) is False:
-            record = Route(
+            record = Routes(
                 route_name=general.encode(self.reserved),
                 enabled=0
             )
@@ -145,7 +145,7 @@ class _Database(object):
 
         # Insert Rider
         if db_rider.idx_rider_exists(1) is False:
-            record = Rider(
+            record = Riders(
                 first_name=general.encode(self.reserved),
                 last_name=general.encode(self.reserved),
                 password=general.encode(self.reserved),
@@ -156,7 +156,7 @@ class _Database(object):
 
         # Insert DriverCompany
         if db_drivercompany.idx_drivercompany_exists(1) is False:
-            record = DriverCompany(
+            record = DriverCompanies(
                 drivercompany_name=general.encode(self.reserved),
                 enabled=0
             )
@@ -165,7 +165,7 @@ class _Database(object):
 
         # Insert Driver
         if db_driver.idx_driver_exists(1) is False:
-            record = Driver(
+            record = Drivers(
                 first_name=general.encode(self.reserved),
                 last_name=general.encode(self.reserved),
                 password=general.encode(self.reserved),
@@ -176,7 +176,7 @@ class _Database(object):
 
         # Insert RiderDevice
         if db_riderdevice.idx_riderdevice_exists(1) is False:
-            record = RiderDevice(
+            record = RiderDevices(
                 id_riderdevice=general.encode(self.reserved),
                 serial_riderdevice=general.encode(self.reserved),
                 enabled=0
@@ -186,7 +186,7 @@ class _Database(object):
 
         # Insert DriverDevice
         if db_driverdevice.idx_driverdevice_exists(1) is False:
-            record = DriverDevice(
+            record = DriverDevices(
                 id_driverdevice=general.encode(self.reserved),
                 serial_driverdevice=general.encode(self.reserved),
                 enabled=0

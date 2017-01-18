@@ -9,7 +9,7 @@ from collections import defaultdict
 # mdl libraries
 from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import DeviceMake
+from mdl.db.db_orm import DeviceMakes
 
 
 class GetIDXMake(object):
@@ -53,8 +53,8 @@ class GetIDXMake(object):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(DeviceMake).filter(
-                DeviceMake.idx_devicemake == idx_devicemake)
+            result = session.query(DeviceMakes).filter(
+                DeviceMakes.idx_devicemake == idx_devicemake)
 
             # Massage data
             if result.count() == 1:

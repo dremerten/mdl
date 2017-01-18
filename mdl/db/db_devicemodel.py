@@ -9,7 +9,7 @@ from collections import defaultdict
 # mdl libraries
 from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import DeviceModel
+from mdl.db.db_orm import DeviceModels
 
 
 class GetIDXDeviceModel(object):
@@ -53,8 +53,8 @@ class GetIDXDeviceModel(object):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(DeviceModel).filter(
-                DeviceModel.idx_devicemodel == idx_devicemodel)
+            result = session.query(DeviceModels).filter(
+                DeviceModels.idx_devicemodel == idx_devicemodel)
 
             # Massage data
             if result.count() == 1:

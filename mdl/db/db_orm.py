@@ -15,7 +15,7 @@ from sqlalchemy import ForeignKey
 BASE = declarative_base()
 
 
-class DriverCompany(BASE):
+class DriverCompanies(BASE):
     """Class defining the mdl_drivercompany table of the database."""
 
     __tablename__ = 'mdl_drivercompany'
@@ -41,7 +41,7 @@ class DriverCompany(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class DeviceMake(BASE):
+class DeviceMakes(BASE):
     """Class defining the mdl_devicemake table of the database."""
 
     __tablename__ = 'mdl_devicemake'
@@ -67,7 +67,7 @@ class DeviceMake(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class DeviceModel(BASE):
+class DeviceModels(BASE):
     """Class defining the mdl_devicemodel table of the database."""
 
     __tablename__ = 'mdl_devicemodel'
@@ -99,7 +99,7 @@ class DeviceModel(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class Route(BASE):
+class Routes(BASE):
     """Class defining the mdl_route table of the database."""
 
     __tablename__ = 'mdl_route'
@@ -125,7 +125,7 @@ class Route(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class Rider(BASE):
+class Riders(BASE):
     """Class defining the mdl_rider table of the database."""
 
     __tablename__ = 'mdl_rider'
@@ -155,7 +155,7 @@ class Rider(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class Driver(BASE):
+class Drivers(BASE):
     """Class defining the mdl_driver table of the database."""
 
     __tablename__ = 'mdl_driver'
@@ -190,7 +190,7 @@ class Driver(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class RiderDevice(BASE):
+class RiderDevices(BASE):
     """Class defining the mdl_riderdevice table of the database."""
 
     __tablename__ = 'mdl_riderdevice'
@@ -227,7 +227,7 @@ class RiderDevice(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class DriverDevice(BASE):
+class DriverDevices(BASE):
     """Class defining the mdl_driverdevice table of the database."""
 
     __tablename__ = 'mdl_driverdevice'
@@ -268,7 +268,7 @@ class DriverDevice(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class Configuration(BASE):
+class Configurations(BASE):
     """Class defining the mdl_configuration table of the database."""
 
     __tablename__ = 'mdl_configuration'

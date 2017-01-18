@@ -9,7 +9,7 @@ from collections import defaultdict
 # mdl libraries
 from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import DriverCompany
+from mdl.db.db_orm import DriverCompanies
 
 
 class GetIDXDriverCompany(object):
@@ -53,8 +53,8 @@ class GetIDXDriverCompany(object):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(DriverCompany).filter(
-                DriverCompany.idx_drivercompany == idx_drivercompany)
+            result = session.query(DriverCompanies).filter(
+                DriverCompanies.idx_drivercompany == idx_drivercompany)
 
             # Massage data
             if result.count() == 1:

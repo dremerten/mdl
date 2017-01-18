@@ -5,7 +5,7 @@
 # mdl libraries
 from mdl.utils import log
 from mdl.db import POOL
-from mdl.db.db_orm import Driver
+from mdl.db.db_orm import Drivers
 
 
 class Database(object):
@@ -198,8 +198,8 @@ def connectivity():
     session = database.session()
 
     try:
-        result = session.query(Driver.idx_driver).filter(
-            Driver.idx_driver == -1)
+        result = session.query(Drivers.idx_driver).filter(
+            Drivers.idx_driver == -1)
         for _ in result:
             break
         valid = True

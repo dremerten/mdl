@@ -10,7 +10,7 @@ from collections import defaultdict
 # mdl libraries
 from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import Configuration
+from mdl.db.db_orm import Configurations
 
 
 class GetConfigurationKey(object):
@@ -48,7 +48,7 @@ class GetConfigurationKey(object):
         database = db.Database()
         session = database.session()
         result = session.query(
-            Configuration).filter(Configuration.config_key == value)
+            Configurations).filter(Configurations.config_key == value)
 
         # Massage data
         if result.count() == 1:
@@ -172,8 +172,8 @@ class GetIDXConfiguration(object):
         database = db.Database()
         session = database.session()
         result = session.query(
-            Configuration).filter(
-                Configuration.idx_configuration == idx_configuration)
+            Configurations).filter(
+                Configurations.idx_configuration == idx_configuration)
 
         # Massage data
         if result.count() == 1:

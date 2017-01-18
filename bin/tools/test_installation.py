@@ -123,11 +123,11 @@ class _APItest(object):
 
         # Get the most recent values from infoset database
         api = reference.ReferenceSampleAPI(self.config)
-        uri = ('db/data/lastcontacts')
+        uri = ('/lastcontacts')
         lastcontacts = api.get(uri)
 
         # Get the datapoint summary
-        uri = ('db/multitable/datapointsummary')
+        uri = ('/datapoints/all/summary')
         datapointsummary = api.get(uri)
 
         # Create a lookup table for datapoints
