@@ -9,7 +9,7 @@ from collections import defaultdict
 # mdl libraries
 from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import Route
+from mdl.db.db_orm import Routes
 
 
 class GetIDXRoute(object):
@@ -52,8 +52,8 @@ class GetIDXRoute(object):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(Route).filter(
-                Route.idx_route == idx_route)
+            result = session.query(Routes).filter(
+                Routes.idx_route == idx_route)
 
             # Massage data
             if result.count() == 1:
