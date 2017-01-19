@@ -1,18 +1,19 @@
 """Module of mdl database functions.
 
-Classes for driverrating data
+Classes for agentname data
 
 """
 # Python standard libraries
 from collections import defaultdict
 
 # mdl libraries
+from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import DriverRatings
+from mdl.db.db_orm import AgentNames
 
 
-class GetIDXDriverRatings(object):
-    """Class to return driverrating data.
+class GetIDXAgentName(object):
+    """Class to return agentname data.
 
     Args:
         None
@@ -24,11 +25,11 @@ class GetIDXDriverRatings(object):
 
     """
 
-    def __init__(self, idx_driverrating):
+    def __init__(self, idx_agentname):
         """Function for intializing the class.
 
         Args:
-            idx_driverrating: DriverRatings idx_driverrating
+            idx_agentname: AgentName idx_agentname
 
         Returns:
             None
@@ -37,33 +38,30 @@ class GetIDXDriverRatings(object):
         # Initialize important variables
         self.data_dict = defaultdict(dict)
         keys = [
-            'idx_driverrating', 'rating_value', 'rating_timestamp',
-            'idx_driver', 'enabled']
+            'idx_agentname', 'agent_name', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
 
         # Fix values passed
-        if isinstance(idx_driverrating, int) is False:
-            idx_driverrating = None
+        if isinstance(idx_agentname, int) is False:
+            idx_agentname = None
 
         # Only work if the value is an integer
-        if (isinstance(idx_driverrating, int) is True) and (
-                idx_driverrating is not None):
+        if (isinstance(idx_agentname, int) is True) and (
+                idx_agentname is not None):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(DriverRatings).filter(
-                DriverRatings.idx_driverrating == idx_driverrating)
+            result = session.query(AgentNames).filter(
+                AgentNames.idx_agentname == idx_agentname)
 
             # Massage data
             if result.count() == 1:
                 for instance in result:
-                    self.data_dict['idx_driverrating'] = idx_driverrating
-                    self.data_dict['rating_value'] = instance.rating_value
-                    self.data_dict['idx_driver'] = instance.idx_driver
+                    self.data_dict['idx_agentname'] = idx_agentname
                     self.data_dict[
-                        'rating_timestamp'] = instance.rating_timestamp
+                        'agent_name'] = general.decode(instance.agent_name)
                     self.data_dict['enabled'] = bool(instance.enabled)
                     self.data_dict['exists'] = True
                     break
@@ -85,8 +83,8 @@ class GetIDXDriverRatings(object):
         value = self.data_dict['exists']
         return value
 
-    def idx_driverrating(self):
-        """Get idx_driverrating value.
+    def idx_agentname(self):
+        """Get idx_agentname value.
 
         Args:
             None
@@ -96,11 +94,11 @@ class GetIDXDriverRatings(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_driverrating']
+        value = self.data_dict['idx_agentname']
         return value
 
-    def idx_driver(self):
-        """Get idx_driver value.
+    def agent_name(self):
+        """Get agentname agent_name.
 
         Args:
             None
@@ -110,39 +108,11 @@ class GetIDXDriverRatings(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_driver']
-        return value
-
-    def rating_timestamp(self):
-        """Get rating_timestamp value.
-
-        Args:
-            None
-
-        Returns:
-            value: Value to return
-
-        """
-        # Initialize key variables
-        value = self.data_dict['rating_timestamp']
-        return value
-
-    def rating_value(self):
-        """Get driverrating rating_value.
-
-        Args:
-            None
-
-        Returns:
-            value: Value to return
-
-        """
-        # Initialize key variables
-        value = self.data_dict['rating_value']
+        value = self.data_dict['agent_name']
         return value
 
     def enabled(self):
-        """Get driverrating enabled.
+        """Get agentname enabled.
 
         Args:
             None
@@ -158,7 +128,7 @@ class GetIDXDriverRatings(object):
         return value
 
     def everything(self):
-        """Get all driverrating data.
+        """Get all agentname data.
 
         Args:
             None
@@ -172,11 +142,11 @@ class GetIDXDriverRatings(object):
         return value
 
 
-def idx_driverrating_exists(idx_driverrating):
-    """Determine whether the idx_driverrating exists.
+def idx_agentname_exists(idx_agentname):
+    """Determine whether the idx_agentname exists.
 
     Args:
-        idx_driverrating: idx_driverrating value
+        idx_agentname: idx_agentname value
 
     Returns:
         exists: True if exists
@@ -186,11 +156,11 @@ def idx_driverrating_exists(idx_driverrating):
     exists = False
 
     # Fix values passed
-    if isinstance(idx_driverrating, int) is False:
-        idx_driverrating = None
+    if isinstance(idx_agentname, int) is False:
+        idx_agentname = None
 
-    # Get information on driverrating from database
-    data = GetIDXDriverRatings(idx_driverrating)
+    # Get information on agentname from database
+    data = GetIDXAgentName(idx_agentname)
     if data.exists() is True:
         exists = True
 

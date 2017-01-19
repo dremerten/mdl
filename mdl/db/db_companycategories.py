@@ -38,8 +38,7 @@ class GetIDXCompanyCategory(object):
         # Initialize important variables
         self.data_dict = defaultdict(dict)
         keys = [
-            'idx_companycategory', 'companycategory_name',
-            'idx_drivercompany', 'enabled']
+            'idx_companycategory', 'companycategory_name', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
@@ -64,8 +63,6 @@ class GetIDXCompanyCategory(object):
                     self.data_dict[
                         'companycategory_name'] = general.decode(
                             instance.companycategory_name)
-                    self.data_dict[
-                        'idx_drivercompany'] = instance.idx_drivercompany
                     self.data_dict['enabled'] = bool(instance.enabled)
                     self.data_dict['exists'] = True
                     break
@@ -99,20 +96,6 @@ class GetIDXCompanyCategory(object):
         """
         # Initialize key variables
         value = self.data_dict['idx_companycategory']
-        return value
-
-    def idx_drivercompany(self):
-        """Get idx_drivercompany value.
-
-        Args:
-            None
-
-        Returns:
-            value: Value to return
-
-        """
-        # Initialize key variables
-        value = self.data_dict['idx_drivercompany']
         return value
 
     def companycategory_name(self):

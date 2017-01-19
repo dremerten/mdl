@@ -39,7 +39,8 @@ class GetIDXDriver(object):
         self.data_dict = defaultdict(dict)
         keys = [
             'idx_driver', 'first_name', 'last_name', 'idx_drivercompany',
-            'password', 'enabled']
+            'password', 'off_duty', 'idx_billaddress', 'idx_address',
+            'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
@@ -61,13 +62,16 @@ class GetIDXDriver(object):
                 for instance in result:
                     self.data_dict['idx_driver'] = idx_driver
                     self.data_dict[
-                        'idx_drivercompany'] = instance.idx_drivercompany
+                        'idx_address'] = instance.idx_address
+                    self.data_dict[
+                        'idx_billaddress'] = instance.idx_billaddress
                     self.data_dict[
                         'password'] = general.decode(instance.password)
                     self.data_dict[
                         'first_name'] = general.decode(instance.first_name)
                     self.data_dict[
                         'last_name'] = general.decode(instance.last_name)
+                    self.data_dict['off_duty'] = instance.off_duty
                     self.data_dict['enabled'] = bool(instance.enabled)
                     self.data_dict['exists'] = True
                     break
@@ -89,6 +93,34 @@ class GetIDXDriver(object):
         value = self.data_dict['exists']
         return value
 
+    def idx_address(self):
+        """Get idx_address value.
+
+        Args:
+            None
+
+        Returns:
+            value: Value to return
+
+        """
+        # Initialize key variables
+        value = self.data_dict['idx_address']
+        return value
+
+    def idx_billaddress(self):
+        """Get idx_billaddress value.
+
+        Args:
+            None
+
+        Returns:
+            value: Value to return
+
+        """
+        # Initialize key variables
+        value = self.data_dict['idx_billaddress']
+        return value
+
     def idx_driver(self):
         """Get idx_driver value.
 
@@ -101,6 +133,20 @@ class GetIDXDriver(object):
         """
         # Initialize key variables
         value = self.data_dict['idx_driver']
+        return value
+
+    def off_duty(self):
+        """Get off_duty value.
+
+        Args:
+            None
+
+        Returns:
+            value: Value to return
+
+        """
+        # Initialize key variables
+        value = self.data_dict['off_duty']
         return value
 
     def idx_drivercompany(self):

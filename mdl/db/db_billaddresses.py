@@ -1,18 +1,19 @@
 """Module of mdl database functions.
 
-Classes for driverrating data
+Classes for geocity data
 
 """
 # Python standard libraries
 from collections import defaultdict
 
 # mdl libraries
+from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import DriverRatings
+from mdl.db.db_orm import BillAddresses
 
 
-class GetIDXDriverRatings(object):
-    """Class to return driverrating data.
+class GetIDXBillAddress(object):
+    """Class to return geocity data.
 
     Args:
         None
@@ -24,11 +25,11 @@ class GetIDXDriverRatings(object):
 
     """
 
-    def __init__(self, idx_driverrating):
+    def __init__(self, idx_billaddress):
         """Function for intializing the class.
 
         Args:
-            idx_driverrating: DriverRatings idx_driverrating
+            idx_billaddress: BillAddress idx_billaddress
 
         Returns:
             None
@@ -37,33 +38,28 @@ class GetIDXDriverRatings(object):
         # Initialize important variables
         self.data_dict = defaultdict(dict)
         keys = [
-            'idx_driverrating', 'rating_value', 'rating_timestamp',
-            'idx_driver', 'enabled']
+            'idx_billaddress', 'idx_geocity', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
 
         # Fix values passed
-        if isinstance(idx_driverrating, int) is False:
-            idx_driverrating = None
+        if isinstance(idx_billaddress, int) is False:
+            idx_billaddress = None
 
         # Only work if the value is an integer
-        if (isinstance(idx_driverrating, int) is True) and (
-                idx_driverrating is not None):
+        if isinstance(idx_billaddress, int) is True and idx_billaddress is not None:
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(DriverRatings).filter(
-                DriverRatings.idx_driverrating == idx_driverrating)
+            result = session.query(BillAddresses).filter(
+                BillAddresses.idx_billaddress == idx_billaddress)
 
             # Massage data
             if result.count() == 1:
                 for instance in result:
-                    self.data_dict['idx_driverrating'] = idx_driverrating
-                    self.data_dict['rating_value'] = instance.rating_value
-                    self.data_dict['idx_driver'] = instance.idx_driver
-                    self.data_dict[
-                        'rating_timestamp'] = instance.rating_timestamp
+                    self.data_dict['idx_billaddress'] = idx_billaddress
+                    self.data_dict['idx_geocity'] = instance.idx_geocity
                     self.data_dict['enabled'] = bool(instance.enabled)
                     self.data_dict['exists'] = True
                     break
@@ -85,8 +81,8 @@ class GetIDXDriverRatings(object):
         value = self.data_dict['exists']
         return value
 
-    def idx_driverrating(self):
-        """Get idx_driverrating value.
+    def idx_billaddress(self):
+        """Get idx_billaddress value.
 
         Args:
             None
@@ -96,11 +92,11 @@ class GetIDXDriverRatings(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_driverrating']
+        value = self.data_dict['idx_billaddress']
         return value
 
-    def idx_driver(self):
-        """Get idx_driver value.
+    def idx_geocity(self):
+        """Get idx_geocity value.
 
         Args:
             None
@@ -110,39 +106,11 @@ class GetIDXDriverRatings(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_driver']
-        return value
-
-    def rating_timestamp(self):
-        """Get rating_timestamp value.
-
-        Args:
-            None
-
-        Returns:
-            value: Value to return
-
-        """
-        # Initialize key variables
-        value = self.data_dict['rating_timestamp']
-        return value
-
-    def rating_value(self):
-        """Get driverrating rating_value.
-
-        Args:
-            None
-
-        Returns:
-            value: Value to return
-
-        """
-        # Initialize key variables
-        value = self.data_dict['rating_value']
+        value = self.data_dict['idx_geocity']
         return value
 
     def enabled(self):
-        """Get driverrating enabled.
+        """Get geocity enabled.
 
         Args:
             None
@@ -158,7 +126,7 @@ class GetIDXDriverRatings(object):
         return value
 
     def everything(self):
-        """Get all driverrating data.
+        """Get all geocity data.
 
         Args:
             None
@@ -172,11 +140,11 @@ class GetIDXDriverRatings(object):
         return value
 
 
-def idx_driverrating_exists(idx_driverrating):
-    """Determine whether the idx_driverrating exists.
+def idx_billaddress_exists(idx_billaddress):
+    """Determine whether the idx_billaddress exists.
 
     Args:
-        idx_driverrating: idx_driverrating value
+        idx_billaddress: idx_billaddress value
 
     Returns:
         exists: True if exists
@@ -186,11 +154,11 @@ def idx_driverrating_exists(idx_driverrating):
     exists = False
 
     # Fix values passed
-    if isinstance(idx_driverrating, int) is False:
-        idx_driverrating = None
+    if isinstance(idx_billaddress, int) is False:
+        idx_billaddress = None
 
-    # Get information on driverrating from database
-    data = GetIDXDriverRatings(idx_driverrating)
+    # Get information on geocity from database
+    data = GetIDXBillAddress(idx_billaddress)
     if data.exists() is True:
         exists = True
 

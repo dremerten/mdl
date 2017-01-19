@@ -8,7 +8,7 @@ from collections import defaultdict
 
 # mdl libraries
 from mdl.db import db
-from mdl.db.db_orm import VehicleRatingss
+from mdl.db.db_orm import VehicleRatings
 
 
 class GetIDXVehicleRatings(object):
@@ -24,11 +24,11 @@ class GetIDXVehicleRatings(object):
 
     """
 
-    def __init__(self, idx_vehicleratings):
+    def __init__(self, idx_vehiclerating):
         """Function for intializing the class.
 
         Args:
-            idx_vehicleratings: VehicleRatings idx_vehicleratings
+            idx_vehiclerating: VehicleRatings idx_vehiclerating
 
         Returns:
             None
@@ -37,29 +37,29 @@ class GetIDXVehicleRatings(object):
         # Initialize important variables
         self.data_dict = defaultdict(dict)
         keys = [
-            'idx_vehicleratings', 'rating_value', 'rating_timestamp',
+            'idx_vehiclerating', 'rating_value', 'rating_timestamp',
             'idx_vehicle', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
 
         # Fix values passed
-        if isinstance(idx_vehicleratings, int) is False:
-            idx_vehicleratings = None
+        if isinstance(idx_vehiclerating, int) is False:
+            idx_vehiclerating = None
 
         # Only work if the value is an integer
-        if (isinstance(idx_vehicleratings, int) is True) and (
-                idx_vehicleratings is not None):
+        if (isinstance(idx_vehiclerating, int) is True) and (
+                idx_vehiclerating is not None):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(VehicleRatingss).filter(
-                VehicleRatingss.idx_vehicleratings == idx_vehicleratings)
+            result = session.query(VehicleRatings).filter(
+                VehicleRatings.idx_vehiclerating == idx_vehiclerating)
 
             # Massage data
             if result.count() == 1:
                 for instance in result:
-                    self.data_dict['idx_vehicleratings'] = idx_vehicleratings
+                    self.data_dict['idx_vehiclerating'] = idx_vehiclerating
                     self.data_dict['rating_value'] = instance.rating_value
                     self.data_dict['idx_vehicle'] = instance.idx_vehicle
                     self.data_dict[
@@ -85,8 +85,8 @@ class GetIDXVehicleRatings(object):
         value = self.data_dict['exists']
         return value
 
-    def idx_vehicleratings(self):
-        """Get idx_vehicleratings value.
+    def idx_vehiclerating(self):
+        """Get idx_vehiclerating value.
 
         Args:
             None
@@ -96,7 +96,7 @@ class GetIDXVehicleRatings(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_vehicleratings']
+        value = self.data_dict['idx_vehiclerating']
         return value
 
     def idx_vehicle(self):
@@ -172,11 +172,11 @@ class GetIDXVehicleRatings(object):
         return value
 
 
-def idx_vehiclerating_exists(idx_vehicleratings):
-    """Determine whether the idx_vehicleratings exists.
+def idx_vehiclerating_exists(idx_vehiclerating):
+    """Determine whether the idx_vehiclerating exists.
 
     Args:
-        idx_vehicleratings: idx_vehicleratings value
+        idx_vehiclerating: idx_vehiclerating value
 
     Returns:
         exists: True if exists
@@ -186,11 +186,11 @@ def idx_vehiclerating_exists(idx_vehicleratings):
     exists = False
 
     # Fix values passed
-    if isinstance(idx_vehicleratings, int) is False:
-        idx_vehicleratings = None
+    if isinstance(idx_vehiclerating, int) is False:
+        idx_vehiclerating = None
 
     # Get information on vehicleratings from database
-    data = GetIDXVehicleRatings(idx_vehicleratings)
+    data = GetIDXVehicleRatings(idx_vehiclerating)
     if data.exists() is True:
         exists = True
 

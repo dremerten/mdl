@@ -1,6 +1,6 @@
 """Module of mdl database functions.
 
-Classes for companyrating data
+Classes for drivercompanyrating data
 
 """
 # Python standard libraries
@@ -8,11 +8,11 @@ from collections import defaultdict
 
 # mdl libraries
 from mdl.db import db
-from mdl.db.db_orm import CompanyRatingss
+from mdl.db.db_orm import DriverCompanyRatings
 
 
-class GetIDXCompanyRatings(object):
-    """Class to return companyrating data.
+class GetIDXDriverCompanyRatings(object):
+    """Class to return drivercompanyrating data.
 
     Args:
         None
@@ -24,11 +24,12 @@ class GetIDXCompanyRatings(object):
 
     """
 
-    def __init__(self, idx_companyrating):
+    def __init__(self, idx_drivercompanyrating):
         """Function for intializing the class.
 
         Args:
-            idx_companyrating: CompanyRatings idx_companyrating
+            idx_drivercompanyrating: DriverCompanyRatings
+                idx_drivercompanyrating
 
         Returns:
             None
@@ -37,29 +38,30 @@ class GetIDXCompanyRatings(object):
         # Initialize important variables
         self.data_dict = defaultdict(dict)
         keys = [
-            'idx_companyrating', 'rating_value', 'rating_timestamp',
+            'idx_drivercompanyrating', 'rating_value', 'rating_timestamp',
             'idx_company', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
 
         # Fix values passed
-        if isinstance(idx_companyrating, int) is False:
-            idx_companyrating = None
+        if isinstance(idx_drivercompanyrating, int) is False:
+            idx_drivercompanyrating = None
 
         # Only work if the value is an integer
-        if (isinstance(idx_companyrating, int) is True) and (
-                idx_companyrating is not None):
+        if (isinstance(idx_drivercompanyrating, int) is True) and (
+                idx_drivercompanyrating is not None):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(CompanyRatingss).filter(
-                CompanyRatingss.idx_companyrating == idx_companyrating)
+            result = session.query(DriverCompanyRatings).filter(
+                DriverCompanyRatings.idx_drivercompanyrating == idx_drivercompanyrating)
 
             # Massage data
             if result.count() == 1:
                 for instance in result:
-                    self.data_dict['idx_companyrating'] = idx_companyrating
+                    self.data_dict[
+                        'idx_drivercompanyrating'] = idx_drivercompanyrating
                     self.data_dict['rating_value'] = instance.rating_value
                     self.data_dict['idx_company'] = instance.idx_company
                     self.data_dict[
@@ -85,8 +87,8 @@ class GetIDXCompanyRatings(object):
         value = self.data_dict['exists']
         return value
 
-    def idx_companyrating(self):
-        """Get idx_companyrating value.
+    def idx_drivercompanyrating(self):
+        """Get idx_drivercompanyrating value.
 
         Args:
             None
@@ -96,7 +98,7 @@ class GetIDXCompanyRatings(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_companyrating']
+        value = self.data_dict['idx_drivercompanyrating']
         return value
 
     def idx_company(self):
@@ -128,7 +130,7 @@ class GetIDXCompanyRatings(object):
         return value
 
     def rating_value(self):
-        """Get companyrating rating_value.
+        """Get drivercompanyrating rating_value.
 
         Args:
             None
@@ -142,7 +144,7 @@ class GetIDXCompanyRatings(object):
         return value
 
     def enabled(self):
-        """Get companyrating enabled.
+        """Get drivercompanyrating enabled.
 
         Args:
             None
@@ -158,7 +160,7 @@ class GetIDXCompanyRatings(object):
         return value
 
     def everything(self):
-        """Get all companyrating data.
+        """Get all drivercompanyrating data.
 
         Args:
             None
@@ -172,11 +174,11 @@ class GetIDXCompanyRatings(object):
         return value
 
 
-def idx_companyrating_exists(idx_companyrating):
-    """Determine whether the idx_companyrating exists.
+def idx_drivercompanyrating_exists(idx_drivercompanyrating):
+    """Determine whether the idx_drivercompanyrating exists.
 
     Args:
-        idx_companyrating: idx_companyrating value
+        idx_drivercompanyrating: idx_drivercompanyrating value
 
     Returns:
         exists: True if exists
@@ -186,11 +188,11 @@ def idx_companyrating_exists(idx_companyrating):
     exists = False
 
     # Fix values passed
-    if isinstance(idx_companyrating, int) is False:
-        idx_companyrating = None
+    if isinstance(idx_drivercompanyrating, int) is False:
+        idx_drivercompanyrating = None
 
-    # Get information on companyrating from database
-    data = GetIDXCompanyRatings(idx_companyrating)
+    # Get information on drivercompanyrating from database
+    data = GetIDXDriverCompanyRatings(idx_drivercompanyrating)
     if data.exists() is True:
         exists = True
 

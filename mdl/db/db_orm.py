@@ -54,9 +54,19 @@ class DriverCompanies(BASE):
         BIGINT(unsigned=True), primary_key=True,
         autoincrement=True, nullable=False)
 
-    idx_geocity = Column(
+    idx_address = Column(
         BIGINT(unsigned=True),
-        ForeignKey('mdl_geocities.idx_geocity'),
+        ForeignKey('mdl_addresses.idx_address'),
+        nullable=False, server_default='1')
+
+    idx_billaddress = Column(
+        BIGINT(unsigned=True),
+        ForeignKey('mdl_billaddresses.idx_billaddress'),
+        nullable=False, server_default='1')
+
+    idx_companycategory = Column(
+        BIGINT(unsigned=True),
+        ForeignKey('mdl_companycategories.idx_companycategory'),
         nullable=False, server_default='1')
 
     drivercompany_name = Column(VARBINARY(128), nullable=True, default=None)
@@ -86,11 +96,6 @@ class CompanyCategories(BASE):
     idx_companycategory = Column(
         BIGINT(unsigned=True), primary_key=True,
         autoincrement=True, nullable=False)
-
-    idx_drivercompany = Column(
-        BIGINT(unsigned=True),
-        ForeignKey('mdl_drivercompanies.idx_drivercompany'),
-        nullable=False, server_default='1')
 
     companycategory_name = Column(VARBINARY(128), nullable=True, default=None)
 
@@ -147,7 +152,7 @@ class DeviceModels(BASE):
 
     idx_devicemake = Column(
         BIGINT(unsigned=True),
-        ForeignKey('mdl_devicemake.idx_devicemake'),
+        ForeignKey('mdl_devicemakes.idx_devicemake'),
         nullable=False, server_default='1')
 
     model_name = Column(VARBINARY(50), nullable=True, default=None)
@@ -237,6 +242,16 @@ class Drivers(BASE):
         ForeignKey('mdl_drivercompanies.idx_drivercompany'),
         nullable=False, server_default='1')
 
+    idx_address = Column(
+        BIGINT(unsigned=True),
+        ForeignKey('mdl_addresses.idx_address'),
+        nullable=False, server_default='1')
+
+    idx_billaddress = Column(
+        BIGINT(unsigned=True),
+        ForeignKey('mdl_billaddresses.idx_billaddress'),
+        nullable=False, server_default='1')
+
     first_name = Column(VARBINARY(50), nullable=True, default=None)
 
     last_name = Column(VARBINARY(50), nullable=True, default=None)
@@ -258,9 +273,9 @@ class Drivers(BASE):
 
 
 class RiderDevices(BASE):
-    """Class defining the mdl_riderdevices table of the database."""
+    """Class defining the mdl_ridersdevices table of the database."""
 
-    __tablename__ = 'mdl_riderdevices'
+    __tablename__ = 'mdl_ridersdevices'
     __table_args__ = (
         UniqueConstraint('id_riderdevice'),
         {
@@ -273,11 +288,11 @@ class RiderDevices(BASE):
         autoincrement=True, nullable=False)
 
     idx_rider = Column(
-        BIGINT(unsigned=True), ForeignKey('mdl_rider.idx_rider'),
+        BIGINT(unsigned=True), ForeignKey('mdl_riders.idx_rider'),
         nullable=False, server_default='1')
 
     idx_devicemodel = Column(
-        BIGINT(unsigned=True), ForeignKey('mdl_devicemodel.idx_devicemodel'),
+        BIGINT(unsigned=True), ForeignKey('mdl_devicemodels.idx_devicemodel'),
         nullable=False, server_default='1')
 
     id_riderdevice = Column(VARBINARY(512), nullable=True, default=None)
@@ -295,9 +310,9 @@ class RiderDevices(BASE):
 
 
 class DriverDevices(BASE):
-    """Class defining the mdl_driverdevices table of the database."""
+    """Class defining the mdl_driversdevices table of the database."""
 
-    __tablename__ = 'mdl_driverdevices'
+    __tablename__ = 'mdl_driversdevices'
     __table_args__ = (
         UniqueConstraint('id_driverdevice'),
         {
@@ -310,15 +325,15 @@ class DriverDevices(BASE):
         autoincrement=True, nullable=False)
 
     idx_driver = Column(
-        BIGINT(unsigned=True), ForeignKey('mdl_driver.idx_driver'),
+        BIGINT(unsigned=True), ForeignKey('mdl_drivers.idx_driver'),
         nullable=False, server_default='1')
 
     idx_route = Column(
-        BIGINT(unsigned=True), ForeignKey('mdl_route.idx_route'),
+        BIGINT(unsigned=True), ForeignKey('mdl_routes.idx_route'),
         nullable=False, server_default='1')
 
     idx_devicemodel = Column(
-        BIGINT(unsigned=True), ForeignKey('mdl_devicemodel.idx_devicemodel'),
+        BIGINT(unsigned=True), ForeignKey('mdl_devicemodels.idx_devicemodel'),
         nullable=False, server_default='1')
 
     idx_creditcard = Column(
@@ -356,7 +371,7 @@ class Vehicles(BASE):
 
     idx_vehiclemodel = Column(
         BIGINT(unsigned=True),
-        ForeignKey('mdl_vehiclemodel.idx_vehiclemodel'),
+        ForeignKey('mdl_vehiclemodels.idx_vehiclemodel'),
         nullable=False, server_default='1')
 
     license_plate = Column(VARBINARY(50), nullable=True, default=None)
@@ -393,7 +408,7 @@ class VehicleCategories(BASE):
 
     idx_vehiclemodel = Column(
         BIGINT(unsigned=True),
-        ForeignKey('mdl_vehiclemodel.idx_vehiclemodel'),
+        ForeignKey('mdl_vehiclemodels.idx_vehiclemodel'),
         nullable=False, server_default='1')
 
     vehiclecategory_name = Column(VARBINARY(256), nullable=True, default=None)
@@ -435,7 +450,7 @@ class VehicleMakes(BASE):
 
 
 class VehicleModels(BASE):
-    """Class defining the mdl_vehiclemodel table of the database."""
+    """Class defining the mdl_vehiclemodels table of the database."""
 
     __tablename__ = 'mdl_vehiclemodels'
     __table_args__ = (
@@ -451,7 +466,7 @@ class VehicleModels(BASE):
 
     idx_vehiclemake = Column(
         BIGINT(unsigned=True),
-        ForeignKey('mdl_vehiclemake.idx_vehiclemake'),
+        ForeignKey('mdl_vehiclemakes.idx_vehiclemake'),
         nullable=False, server_default='1')
 
     model_name = Column(VARBINARY(50), nullable=True, default=None)
@@ -466,24 +481,24 @@ class VehicleModels(BASE):
         DATETIME, server_default=text('CURRENT_TIMESTAMP'))
 
 
-class CompanyRatings(BASE):
+class DriverCompanyRatings(BASE):
     """Class defining the mdl_companyrating table of the database."""
 
-    __tablename__ = 'mdl_companyratings'
+    __tablename__ = 'mdl_drivercompanyratings'
     __table_args__ = (
-        UniqueConstraint('idx_companyrating', 'rating_timestamp'),
+        UniqueConstraint('idx_drivercompanyrating', 'rating_timestamp'),
         {
             'mysql_engine': 'InnoDB'
         }
         )
 
-    idx_companyrating = Column(
+    idx_drivercompanyrating = Column(
         BIGINT(unsigned=True), primary_key=True,
         autoincrement=True, nullable=False)
 
-    idx_company = Column(
+    idx_drivercompany = Column(
         BIGINT(unsigned=True),
-        ForeignKey('mdl_companies.idx_company'),
+        ForeignKey('mdl_drivercompanies.idx_drivercompany'),
         nullable=False, server_default='1')
 
     rating_timestamp = Column(
@@ -537,9 +552,9 @@ class VehicleRatings(BASE):
 
 
 class DriverRatings(BASE):
-    """Class defining the mdl_driverrating table of the database."""
+    """Class defining the mdl_driversrating table of the database."""
 
-    __tablename__ = 'mdl_driverratings'
+    __tablename__ = 'mdl_driversratings'
     __table_args__ = (
         UniqueConstraint('idx_driverrating', 'rating_timestamp'),
         {
@@ -650,6 +665,185 @@ class GeoCities(BASE):
         nullable=False, server_default='1')
 
     geocity_name = Column(VARBINARY(128), nullable=True, default=None)
+
+    enabled = Column(INTEGER(unsigned=True), server_default='1')
+
+    ts_modified = Column(
+        DATETIME, server_default=text(
+            'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),)
+
+    ts_created = Column(
+        DATETIME, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class Addresses(BASE):
+    """Class defining the mdl_addresses table of the database."""
+
+    __tablename__ = 'mdl_addresses'
+    __table_args__ = (
+        {
+            'mysql_engine': 'InnoDB'
+        }
+        )
+
+    idx_address = Column(
+        BIGINT(unsigned=True), primary_key=True,
+        autoincrement=True, nullable=False)
+
+    idx_geocity = Column(
+        BIGINT(unsigned=True),
+        ForeignKey('mdl_geocities.idx_geocity'),
+        nullable=False, server_default='1')
+
+    enabled = Column(INTEGER(unsigned=True), server_default='1')
+
+    ts_modified = Column(
+        DATETIME, server_default=text(
+            'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),)
+
+    ts_created = Column(
+        DATETIME, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class BillAddresses(BASE):
+    """Class defining the mdl_billaddresses table of the database."""
+
+    __tablename__ = 'mdl_billaddresses'
+    __table_args__ = (
+        {
+            'mysql_engine': 'InnoDB'
+        }
+        )
+
+    idx_billaddress = Column(
+        BIGINT(unsigned=True), primary_key=True,
+        autoincrement=True, nullable=False)
+
+    idx_geocity = Column(
+        BIGINT(unsigned=True),
+        ForeignKey('mdl_geocities.idx_geocity'),
+        nullable=False, server_default='1')
+
+    enabled = Column(INTEGER(unsigned=True), server_default='1')
+
+    ts_modified = Column(
+        DATETIME, server_default=text(
+            'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),)
+
+    ts_created = Column(
+        DATETIME, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class RiderDeviceAgents(BASE):
+    """Class defining the mdl_ridersdeviceagents table of the database."""
+
+    __tablename__ = 'mdl_ridersdeviceagents'
+    __table_args__ = (
+        UniqueConstraint(
+            'idx_riderdevice', 'idx_agent'),
+        {
+            'mysql_engine': 'InnoDB'
+        }
+        )
+
+    idx_riderdeviceagent = Column(
+        BIGINT(unsigned=True), primary_key=True,
+        autoincrement=True, nullable=False)
+
+    idx_riderdevice = Column(
+        BIGINT(unsigned=True), ForeignKey('mdl_ridersdevices.idx_riderdevice'),
+        nullable=False, server_default='1')
+
+    idx_agent = Column(
+        BIGINT(unsigned=True), ForeignKey('mdl_agents.idx_agent'),
+        nullable=False, server_default='1')
+
+    enabled = Column(INTEGER(unsigned=True), server_default='1')
+
+    ts_modified = Column(
+        DATETIME, server_default=text(
+            'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+
+    ts_created = Column(
+        DATETIME, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class DriverDeviceAgents(BASE):
+    """Class defining the mdl_driversdeviceagents table of the database."""
+
+    __tablename__ = 'mdl_driversdeviceagents'
+    __table_args__ = (
+        UniqueConstraint(
+            'idx_driverdevice', 'idx_agent'),
+        {
+            'mysql_engine': 'InnoDB'
+        }
+        )
+
+    idx_driverdeviceagent = Column(
+        BIGINT(unsigned=True), primary_key=True,
+        autoincrement=True, nullable=False)
+
+    idx_driverdevice = Column(
+        BIGINT(unsigned=True),
+        ForeignKey('mdl_driversdevices.idx_driverdevice'),
+        nullable=False, server_default='1')
+
+    idx_agent = Column(
+        BIGINT(unsigned=True), ForeignKey('mdl_agents.idx_agent'),
+        nullable=False, server_default='1')
+
+    enabled = Column(INTEGER(unsigned=True), server_default='1')
+
+    ts_modified = Column(
+        DATETIME, server_default=text(
+            'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
+
+    ts_created = Column(
+        DATETIME, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class Agents(BASE):
+    """Class defining the mdl_agents table of the database."""
+
+    __tablename__ = 'mdl_agents'
+    __table_args__ = {
+        'mysql_engine': 'InnoDB'
+    }
+
+    idx_agent = Column(
+        BIGINT(unsigned=True), primary_key=True,
+        autoincrement=True, nullable=False)
+
+    idx_agentname = Column(
+        BIGINT(unsigned=True), ForeignKey('mdl_agentnames.idx_agentname'),
+        nullable=False, server_default='1')
+
+    id_agent = Column(VARBINARY(512), unique=True, nullable=True, default=None)
+
+    enabled = Column(INTEGER(unsigned=True), server_default='1')
+
+    ts_modified = Column(
+        DATETIME, server_default=text(
+            'CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),)
+
+    ts_created = Column(
+        DATETIME, server_default=text('CURRENT_TIMESTAMP'))
+
+
+class AgentNames(BASE):
+    """Class defining the mdl_agent table of the database."""
+
+    __tablename__ = 'mdl_agentnames'
+    __table_args__ = {
+        'mysql_engine': 'InnoDB'
+    }
+
+    idx_agentname = Column(
+        BIGINT(unsigned=True), primary_key=True,
+        autoincrement=True, nullable=False)
+
+    agent_name = Column(VARBINARY(512), nullable=True, default=None)
 
     enabled = Column(INTEGER(unsigned=True), server_default='1')
 

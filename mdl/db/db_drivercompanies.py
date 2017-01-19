@@ -39,7 +39,7 @@ class GetIDXDriverCompany(object):
         self.data_dict = defaultdict(dict)
         keys = [
             'idx_drivercompany', 'drivercompany_name',
-            'idx_geocity', 'enabled']
+            'idx_address', 'idx_billaddress', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
@@ -64,7 +64,9 @@ class GetIDXDriverCompany(object):
                     self.data_dict[
                         'drivercompany_name'] = general.decode(
                             instance.drivercompany_name)
-                    self.data_dict['idx_geocity'] = instance.idx_geocity
+                    self.data_dict['idx_address'] = instance.idx_address
+                    self.data_dict[
+                        'idx_billaddress'] = instance.idx_billaddress
                     self.data_dict['enabled'] = bool(instance.enabled)
                     self.data_dict['exists'] = True
                     break
@@ -100,8 +102,8 @@ class GetIDXDriverCompany(object):
         value = self.data_dict['idx_drivercompany']
         return value
 
-    def idx_geocity(self):
-        """Get idx_geocity value.
+    def idx_address(self):
+        """Get idx_address value.
 
         Args:
             None
@@ -111,7 +113,21 @@ class GetIDXDriverCompany(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_geocity']
+        value = self.data_dict['idx_address']
+        return value
+
+    def idx_billaddress(self):
+        """Get idx_billaddress value.
+
+        Args:
+            None
+
+        Returns:
+            value: Value to return
+
+        """
+        # Initialize key variables
+        value = self.data_dict['idx_billaddress']
         return value
 
     def drivercompany_name(self):

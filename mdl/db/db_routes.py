@@ -48,7 +48,8 @@ class GetIDXRoute(object):
             idx_route = None
 
         # Only work if the value is an integer
-        if isinstance(idx_route, int) is True and idx_route is not None:
+        if (isinstance(idx_route, int) is True) and (
+                idx_route is not None):
             # Get the result
             database = db.Database()
             session = database.session()
