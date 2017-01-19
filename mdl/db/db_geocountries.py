@@ -1,6 +1,6 @@
 """Module of mdl database functions.
 
-Classes for company data
+Classes for geocountry data
 
 """
 # Python standard libraries
@@ -9,11 +9,11 @@ from collections import defaultdict
 # mdl libraries
 from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import DriverCompanies
+from mdl.db.db_orm import GeoCountries
 
 
-class GetIDXDriverCompany(object):
-    """Class to return company data.
+class GetIDXGeoCountry(object):
+    """Class to return geocountry data.
 
     Args:
         None
@@ -25,11 +25,11 @@ class GetIDXDriverCompany(object):
 
     """
 
-    def __init__(self, idx_drivercompany):
+    def __init__(self, idx_geocountry):
         """Function for intializing the class.
 
         Args:
-            idx_drivercompany: DriverCompany idx_drivercompany
+            idx_geocountry: GeoCountry idx_geocountry
 
         Returns:
             None
@@ -38,31 +38,32 @@ class GetIDXDriverCompany(object):
         # Initialize important variables
         self.data_dict = defaultdict(dict)
         keys = [
-            'idx_drivercompany', 'drivercompany_name', 'enabled']
+            'idx_geocountry', 'geocountry_name', 'idx_georegion', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
 
         # Fix values passed
-        if isinstance(idx_drivercompany, int) is False:
-            idx_drivercompany = None
+        if isinstance(idx_geocountry, int) is False:
+            idx_geocountry = None
 
         # Only work if the value is an integer
-        if (isinstance(idx_drivercompany, int)) is True and (
-                idx_drivercompany is not None):
+        if (isinstance(idx_geocountry, int) is True) and (
+                idx_geocountry is not None):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(DriverCompanies).filter(
-                DriverCompanies.idx_drivercompany == idx_drivercompany)
+            result = session.query(GeoCountries).filter(
+                GeoCountries.idx_geocountry == idx_geocountry)
 
             # Massage data
             if result.count() == 1:
                 for instance in result:
-                    self.data_dict['idx_drivercompany'] = idx_drivercompany
+                    self.data_dict['idx_geocountry'] = idx_geocountry
                     self.data_dict[
-                        'drivercompany_name'] = general.decode(
-                            instance.drivercompany_name)
+                        'geocountry_name'] = general.decode(
+                            instance.geocountry_name)
+                    self.data_dict['idx_georegion'] = instance.idx_georegion
                     self.data_dict['enabled'] = bool(instance.enabled)
                     self.data_dict['exists'] = True
                     break
@@ -84,8 +85,8 @@ class GetIDXDriverCompany(object):
         value = self.data_dict['exists']
         return value
 
-    def idx_drivercompany(self):
-        """Get idx_drivercompany value.
+    def idx_geocountry(self):
+        """Get idx_geocountry value.
 
         Args:
             None
@@ -95,11 +96,11 @@ class GetIDXDriverCompany(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_drivercompany']
+        value = self.data_dict['idx_geocountry']
         return value
 
-    def drivercompany_name(self):
-        """Get company drivercompany_name.
+    def idx_georegion(self):
+        """Get idx_georegion value.
 
         Args:
             None
@@ -109,11 +110,25 @@ class GetIDXDriverCompany(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['drivercompany_name']
+        value = self.data_dict['idx_georegion']
+        return value
+
+    def geocountry_name(self):
+        """Get geocountry geocountry_name.
+
+        Args:
+            None
+
+        Returns:
+            value: Value to return
+
+        """
+        # Initialize key variables
+        value = self.data_dict['geocountry_name']
         return value
 
     def enabled(self):
-        """Get company enabled.
+        """Get geocountry enabled.
 
         Args:
             None
@@ -129,7 +144,7 @@ class GetIDXDriverCompany(object):
         return value
 
     def everything(self):
-        """Get all company data.
+        """Get all geocountry data.
 
         Args:
             None
@@ -143,11 +158,11 @@ class GetIDXDriverCompany(object):
         return value
 
 
-def idx_drivercompany_exists(idx_drivercompany):
-    """Determine whether the idx_drivercompany exists.
+def idx_geocountry_exists(idx_geocountry):
+    """Determine whether the idx_geocountry exists.
 
     Args:
-        idx_drivercompany: idx_drivercompany value
+        idx_geocountry: idx_geocountry value
 
     Returns:
         exists: True if exists
@@ -157,11 +172,11 @@ def idx_drivercompany_exists(idx_drivercompany):
     exists = False
 
     # Fix values passed
-    if isinstance(idx_drivercompany, int) is False:
-        idx_drivercompany = None
+    if isinstance(idx_geocountry, int) is False:
+        idx_geocountry = None
 
-    # Get information on company from database
-    data = GetIDXDriverCompany(idx_drivercompany)
+    # Get information on geocountry from database
+    data = GetIDXGeoCountry(idx_geocountry)
     if data.exists() is True:
         exists = True
 

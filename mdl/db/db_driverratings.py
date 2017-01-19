@@ -1,19 +1,18 @@
 """Module of mdl database functions.
 
-Classes for driver data
+Classes for driverrating data
 
 """
 # Python standard libraries
 from collections import defaultdict
 
 # mdl libraries
-from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import Drivers
+from mdl.db.db_orm import DriverRatings
 
 
-class GetIDXDriver(object):
-    """Class to return driver data.
+class GetIDXDriverRatings(object):
+    """Class to return driverrating data.
 
     Args:
         None
@@ -25,11 +24,11 @@ class GetIDXDriver(object):
 
     """
 
-    def __init__(self, idx_driver):
+    def __init__(self, idx_driverrating):
         """Function for intializing the class.
 
         Args:
-            idx_driver: Driver idx_driver
+            idx_driverrating: DriverRatings idx_driverrating
 
         Returns:
             None
@@ -38,36 +37,33 @@ class GetIDXDriver(object):
         # Initialize important variables
         self.data_dict = defaultdict(dict)
         keys = [
-            'idx_driver', 'first_name', 'last_name', 'idx_drivercompany',
-            'password', 'enabled']
+            'idx_driverrating', 'rating_value', 'rating_timestamp',
+            'idx_driver', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
 
         # Fix values passed
-        if isinstance(idx_driver, int) is False:
-            idx_driver = None
+        if isinstance(idx_driverrating, int) is False:
+            idx_driverrating = None
 
         # Only work if the value is an integer
-        if isinstance(idx_driver, int) is True and idx_driver is not None:
+        if (isinstance(idx_driverrating, int) is True) and (
+                idx_driverrating is not None):
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(Drivers).filter(
-                Drivers.idx_driver == idx_driver)
+            result = session.query(DriverRatings).filter(
+                DriverRatings.idx_driverrating == idx_driverrating)
 
             # Massage data
             if result.count() == 1:
                 for instance in result:
-                    self.data_dict['idx_driver'] = idx_driver
+                    self.data_dict['idx_driverrating'] = idx_driverrating
+                    self.data_dict['rating_value'] = instance.rating_value
+                    self.data_dict['idx_driver'] = instance.idx_driver
                     self.data_dict[
-                        'idx_drivercompany'] = instance.idx_drivercompany
-                    self.data_dict[
-                        'password'] = general.decode(instance.password)
-                    self.data_dict[
-                        'first_name'] = general.decode(instance.first_name)
-                    self.data_dict[
-                        'last_name'] = general.decode(instance.last_name)
+                        'rating_timestamp'] = instance.rating_timestamp
                     self.data_dict['enabled'] = bool(instance.enabled)
                     self.data_dict['exists'] = True
                     break
@@ -89,6 +85,20 @@ class GetIDXDriver(object):
         value = self.data_dict['exists']
         return value
 
+    def idx_driverrating(self):
+        """Get idx_driverrating value.
+
+        Args:
+            None
+
+        Returns:
+            value: Value to return
+
+        """
+        # Initialize key variables
+        value = self.data_dict['idx_driverrating']
+        return value
+
     def idx_driver(self):
         """Get idx_driver value.
 
@@ -103,8 +113,8 @@ class GetIDXDriver(object):
         value = self.data_dict['idx_driver']
         return value
 
-    def idx_drivercompany(self):
-        """Get idx_drivercompany value.
+    def rating_timestamp(self):
+        """Get rating_timestamp value.
 
         Args:
             None
@@ -114,11 +124,11 @@ class GetIDXDriver(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_drivercompany']
+        value = self.data_dict['rating_timestamp']
         return value
 
-    def first_name(self):
-        """Get first_name value.
+    def rating_value(self):
+        """Get driverrating rating_value.
 
         Args:
             None
@@ -128,39 +138,11 @@ class GetIDXDriver(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['first_name']
-        return value
-
-    def last_name(self):
-        """Get driver last_name.
-
-        Args:
-            None
-
-        Returns:
-            value: Value to return
-
-        """
-        # Initialize key variables
-        value = self.data_dict['last_name']
-        return value
-
-    def password(self):
-        """Get driver password.
-
-        Args:
-            None
-
-        Returns:
-            value: Value to return
-
-        """
-        # Initialize key variables
-        value = self.data_dict['password']
+        value = self.data_dict['rating_value']
         return value
 
     def enabled(self):
-        """Get driver enabled.
+        """Get driverrating enabled.
 
         Args:
             None
@@ -176,7 +158,7 @@ class GetIDXDriver(object):
         return value
 
     def everything(self):
-        """Get all driver data.
+        """Get all driverrating data.
 
         Args:
             None
@@ -190,11 +172,11 @@ class GetIDXDriver(object):
         return value
 
 
-def idx_driver_exists(idx_driver):
-    """Determine whether the idx_driver exists.
+def idx_driverrating_exists(idx_driverrating):
+    """Determine whether the idx_driverrating exists.
 
     Args:
-        idx_driver: idx_driver value
+        idx_driverrating: idx_driverrating value
 
     Returns:
         exists: True if exists
@@ -204,11 +186,11 @@ def idx_driver_exists(idx_driver):
     exists = False
 
     # Fix values passed
-    if isinstance(idx_driver, int) is False:
-        idx_driver = None
+    if isinstance(idx_driverrating, int) is False:
+        idx_driverrating = None
 
-    # Get information on driver from database
-    data = GetIDXDriver(idx_driver)
+    # Get information on driverrating from database
+    data = GetIDXDriverRatings(idx_driverrating)
     if data.exists() is True:
         exists = True
 

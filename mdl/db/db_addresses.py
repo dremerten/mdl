@@ -1,6 +1,6 @@
 """Module of mdl database functions.
 
-Classes for make data
+Classes for geocity data
 
 """
 # Python standard libraries
@@ -9,11 +9,11 @@ from collections import defaultdict
 # mdl libraries
 from mdl.utils import general
 from mdl.db import db
-from mdl.db.db_orm import DeviceMakes
+from mdl.db.db_orm import Addresses
 
 
-class GetIDXMake(object):
-    """Class to return make data.
+class GetIDXAddress(object):
+    """Class to return geocity data.
 
     Args:
         None
@@ -25,11 +25,11 @@ class GetIDXMake(object):
 
     """
 
-    def __init__(self, idx_devicemake):
+    def __init__(self, idx_address):
         """Function for intializing the class.
 
         Args:
-            idx_devicemake: Make idx_devicemake
+            idx_address: Address idx_address
 
         Returns:
             None
@@ -38,30 +38,28 @@ class GetIDXMake(object):
         # Initialize important variables
         self.data_dict = defaultdict(dict)
         keys = [
-            'idx_devicemake', 'make_name', 'enabled']
+            'idx_address', 'idx_geocity', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
 
         # Fix values passed
-        if isinstance(idx_devicemake, int) is False:
-            idx_devicemake = None
+        if isinstance(idx_address, int) is False:
+            idx_address = None
 
         # Only work if the value is an integer
-        if (isinstance(idx_devicemake, int) is True) and (
-                idx_devicemake is not None):
+        if isinstance(idx_address, int) is True and idx_address is not None:
             # Get the result
             database = db.Database()
             session = database.session()
-            result = session.query(DeviceMakes).filter(
-                DeviceMakes.idx_devicemake == idx_devicemake)
+            result = session.query(Addresses).filter(
+                Addresses.idx_address == idx_address)
 
             # Massage data
             if result.count() == 1:
                 for instance in result:
-                    self.data_dict['idx_devicemake'] = idx_devicemake
-                    self.data_dict[
-                        'make_name'] = general.decode(instance.make_name)
+                    self.data_dict['idx_address'] = idx_address
+                    self.data_dict['idx_geocity'] = instance.idx_geocity
                     self.data_dict['enabled'] = bool(instance.enabled)
                     self.data_dict['exists'] = True
                     break
@@ -83,8 +81,8 @@ class GetIDXMake(object):
         value = self.data_dict['exists']
         return value
 
-    def idx_devicemake(self):
-        """Get idx_devicemake value.
+    def idx_address(self):
+        """Get idx_address value.
 
         Args:
             None
@@ -94,11 +92,11 @@ class GetIDXMake(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_devicemake']
+        value = self.data_dict['idx_address']
         return value
 
-    def make_name(self):
-        """Get make make_name.
+    def idx_geocity(self):
+        """Get idx_geocity value.
 
         Args:
             None
@@ -108,11 +106,11 @@ class GetIDXMake(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['make_name']
+        value = self.data_dict['idx_geocity']
         return value
 
     def enabled(self):
-        """Get make enabled.
+        """Get geocity enabled.
 
         Args:
             None
@@ -128,7 +126,7 @@ class GetIDXMake(object):
         return value
 
     def everything(self):
-        """Get all make data.
+        """Get all geocity data.
 
         Args:
             None
@@ -142,11 +140,11 @@ class GetIDXMake(object):
         return value
 
 
-def idx_devicemake_exists(idx_devicemake):
-    """Determine whether the idx_devicemake exists.
+def idx_address_exists(idx_address):
+    """Determine whether the idx_address exists.
 
     Args:
-        idx_devicemake: idx_devicemake value
+        idx_address: idx_address value
 
     Returns:
         exists: True if exists
@@ -156,11 +154,11 @@ def idx_devicemake_exists(idx_devicemake):
     exists = False
 
     # Fix values passed
-    if isinstance(idx_devicemake, int) is False:
-        idx_devicemake = None
+    if isinstance(idx_address, int) is False:
+        idx_address = None
 
-    # Get information on make from database
-    data = GetIDXMake(idx_devicemake)
+    # Get information on geocity from database
+    data = GetIDXAddress(idx_address)
     if data.exists() is True:
         exists = True
 

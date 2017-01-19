@@ -105,7 +105,7 @@ class Config(object):
         # Get result
         received = _key_sub_key(key, sub_key, self.config_dict, die=False)
         if received is None:
-            received = 'infoset/api/v1.0'
+            received = 'infoset/api/v1'
 
         # Trim leading slash if exists
         received = received.lstrip('/').rstrip('/')
@@ -165,7 +165,7 @@ class Config(object):
 
         """
         # Return
-        result = 'mdl/api/v1.0'
+        result = 'mdl/api/v1'
         return result
 
     def interval(self):
