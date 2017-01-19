@@ -30,15 +30,30 @@ from mdl.utils import configuration
 from mdl.utils import general
 from mdl.db.db_orm import BASE, DeviceMakes, DeviceModels, Routes, Riders
 from mdl.db.db_orm import DriverCompanies, RiderDevices, DriverDevices, Drivers
+from mdl.db.db_orm import CreditCards, CompanyCategories, VehicleMakes
+from mdl.db.db_orm import VehicleModels, VehicleCategories, VehicleRatings
+from mdl.db.db_orm import DriverRatings, CompanyRatings, GeoCities
+from mdl.db.db_orm import GeoRegions, GeoCountries
 from mdl.db import URL, db
-from mdl.db import db_devicemake
-from mdl.db import db_devicemodel
-from mdl.db import db_route
-from mdl.db import db_rider
-from mdl.db import db_driver
-from mdl.db import db_drivercompany
-from mdl.db import db_riderdevice
-from mdl.db import db_driverdevice
+from mdl.db import db_devicemakes
+from mdl.db import db_devicemodels
+from mdl.db import db_routes
+from mdl.db import db_riders
+from mdl.db import db_drivers
+from mdl.db import db_drivercompanies
+from mdl.db import db_riderdevices
+from mdl.db import db_driverdevices
+from mdl.db import db_creditcards
+from mdl.db import db_companycategories
+from mdl.db import db_vehiclecategories
+from mdl.db import db_vehiclemakes
+from mdl.db import db_vehiclemodels
+from mdl.db import db_companyratings
+from mdl.db import db_vehicleratings
+from mdl.db import db_driverratings
+from mdl.db import db_geocities
+from mdl.db import db_geocountries
+from mdl.db import db_georegions
 
 
 class _Database(object):
@@ -116,8 +131,16 @@ class _Database(object):
             None
 
         """
+        # Insert CreditCard
+        if db_creditcards.idx_creditcard_exists(1) is False:
+            record = CreditCards(
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1000)
+
         # Insert DeviceMake
-        if db_devicemake.idx_devicemake_exists(1) is False:
+        if db_devicemakes.idx_devicemake_exists(1) is False:
             record = DeviceMakes(
                 make_name=general.encode(self.reserved),
                 enabled=0
@@ -126,7 +149,7 @@ class _Database(object):
             database.add(record, 1000)
 
         # Insert DeviceModel
-        if db_devicemodel.idx_devicemodel_exists(1) is False:
+        if db_devicemodels.idx_devicemodel_exists(1) is False:
             record = DeviceModels(
                 model_name=general.encode(self.reserved),
                 enabled=0
@@ -134,8 +157,26 @@ class _Database(object):
             database = db.Database()
             database.add(record, 1001)
 
+        # Insert VehicleMake
+        if db_vehiclemakes.idx_vehiclemake_exists(1) is False:
+            record = VehicleMakes(
+                make_name=general.encode(self.reserved),
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1000)
+
+        # Insert VehicleModel
+        if db_vehiclemodels.idx_vehiclemodel_exists(1) is False:
+            record = VehicleModels(
+                model_name=general.encode(self.reserved),
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1001)
+
         # Insert Route
-        if db_route.idx_route_exists(1) is False:
+        if db_routes.idx_route_exists(1) is False:
             record = Routes(
                 route_name=general.encode(self.reserved),
                 enabled=0
@@ -144,7 +185,7 @@ class _Database(object):
             database.add(record, 1002)
 
         # Insert Rider
-        if db_rider.idx_rider_exists(1) is False:
+        if db_riders.idx_rider_exists(1) is False:
             record = Riders(
                 first_name=general.encode(self.reserved),
                 last_name=general.encode(self.reserved),
@@ -155,7 +196,7 @@ class _Database(object):
             database.add(record, 1003)
 
         # Insert DriverCompany
-        if db_drivercompany.idx_drivercompany_exists(1) is False:
+        if db_drivercompanies.idx_drivercompany_exists(1) is False:
             record = DriverCompanies(
                 drivercompany_name=general.encode(self.reserved),
                 enabled=0
@@ -164,7 +205,7 @@ class _Database(object):
             database.add(record, 1004)
 
         # Insert Driver
-        if db_driver.idx_driver_exists(1) is False:
+        if db_drivers.idx_driver_exists(1) is False:
             record = Drivers(
                 first_name=general.encode(self.reserved),
                 last_name=general.encode(self.reserved),
@@ -175,7 +216,7 @@ class _Database(object):
             database.add(record, 1005)
 
         # Insert RiderDevice
-        if db_riderdevice.idx_riderdevice_exists(1) is False:
+        if db_riderdevices.idx_riderdevice_exists(1) is False:
             record = RiderDevices(
                 id_riderdevice=general.encode(self.reserved),
                 serial_riderdevice=general.encode(self.reserved),
@@ -185,10 +226,76 @@ class _Database(object):
             database.add(record, 1006)
 
         # Insert DriverDevice
-        if db_driverdevice.idx_driverdevice_exists(1) is False:
+        if db_driverdevices.idx_driverdevice_exists(1) is False:
             record = DriverDevices(
                 id_driverdevice=general.encode(self.reserved),
                 serial_driverdevice=general.encode(self.reserved),
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1007)
+
+        # Insert CompanyCategory
+        if db_companycategories.idx_companycategory_exists(1) is False:
+            record = CompanyCategories(
+                companycategory_name=general.encode(self.reserved),
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1007)
+
+        # Insert VehicleCategory
+        if db_vehiclecategories.idx_vehiclecategory_exists(1) is False:
+            record = VehicleCategories(
+                vehiclecategory_name=general.encode(self.reserved),
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1007)
+
+        # Insert CompanyRatings
+        if db_companyratings.idx_companyrating_exists(1) is False:
+            record = CompanyRatings(
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1007)
+
+        # Insert VehicleRatings
+        if db_vehicleratings.idx_vehiclerating_exists(1) is False:
+            record = VehicleRatings(
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1007)
+
+        # Insert DriverRatings
+        if db_driverratings.idx_driverrating_exists(1) is False:
+            record = DriverRatings(
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1007)
+
+        # Insert GeoCities
+        if db_geocities.idx_geocity_exists(1) is False:
+            record = GeoCities(
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1007)
+
+        # Insert GeoCountries
+        if db_geocountries.idx_geocountry_exists(1) is False:
+            record = GeoCountries(
+                enabled=0
+            )
+            database = db.Database()
+            database.add(record, 1007)
+
+        # Insert GeoRegions
+        if db_georegions.idx_georegion_exists(1) is False:
+            record = GeoRegions(
                 enabled=0
             )
             database = db.Database()
