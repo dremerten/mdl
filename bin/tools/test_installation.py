@@ -8,12 +8,25 @@ Extracts agent data from cache directory files.
 
 # Standard libraries
 import sys
+import os
 import random
 from collections import defaultdict
 from datetime import datetime
 from pprint import pprint
 import argparse
 import requests
+
+# Try to create a working PYTHONPATH
+script_directory = os.path.dirname(os.path.realpath(__file__))
+bin_directory = os.path.abspath(os.path.join(script_directory, os.pardir))
+root_directory = os.path.abspath(os.path.join(bin_directory, os.pardir))
+if script_directory.endswith('/mdl/bin/tools') is True:
+    sys.path.append(root_directory)
+else:
+    print(
+        'This script is not installed in the "mdl/bin/tools" '
+        'directory. Please fix.')
+    sys.exit(2)
 
 # mdl libraries
 try:

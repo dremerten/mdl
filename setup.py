@@ -18,6 +18,16 @@ import re
 import yaml
 from sqlalchemy import create_engine
 
+# Try to create a working PYTHONPATH
+root_directory = os.path.dirname(os.path.realpath(__file__))
+if root_directory.endswith('/mdl') is True:
+    sys.path.append(root_directory)
+else:
+    print(
+        'This script is not installed in the "mdl/" directory. '
+        'Please fix.')
+    sys.exit(2)
+
 # mdl libraries
 try:
     from mdl.utils import log
