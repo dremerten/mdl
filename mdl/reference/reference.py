@@ -500,7 +500,7 @@ class ReferenceSampleAgent(object):
                     'Purging cache file %s after successfully '
                     'contacting server'
                     '') % (filepath)
-                log.log2info(1014, log_message)
+                log.log2info(1053, log_message)
 
 
 def infoset_api_url_prefix(config):
