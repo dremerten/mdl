@@ -120,14 +120,15 @@ class _APItest(object):
                 log_message = (
                     'Successfully posted test data for {}'
                     ''.format(devicename))
-                log.log2see(1015, log_message)
+                log.log2see(1055, log_message)
 
             else:
                 # Log success
                 log_message = (
-                    'Failed to post data for {}'
+                    'Failed to post data for {}. '
+                    'Make sure the mdl API is running.'
                     ''.format(devicename))
-                log.log2see(1015, log_message)
+                log.log2see(1056, log_message)
 
     def infoset_get(self,):
         """Get posted data from infoset."""
@@ -202,16 +203,17 @@ class _APItest(object):
 
                 # Log success
                 log_message = (
-                    'Successfully posted test data for {}'
+                    'Successfully posted test data for {}. '
                     ''.format(devicename))
-                log.log2see(1015, log_message)
+                log.log2see(1057, log_message)
 
             else:
                 # Log success
                 log_message = (
-                    'Failed to post data for {}'
+                    'Failed to post data for {}. '
+                    'Make sure the infoset-ng API is running.'
                     ''.format(devicename))
-                log.log2see(1015, log_message)
+                log.log2see(1059, log_message)
 
     def _id_agent(self, devicename):
         """Generate an id_agent for a device.

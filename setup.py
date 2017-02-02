@@ -129,7 +129,7 @@ class _DBForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1000)
+            database.add(record, 1026)
 
         # Insert DeviceMake
         if db_devicemakes.idx_devicemake_exists(1) is False:
@@ -138,7 +138,7 @@ class _DBForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1000)
+            database.add(record, 1027)
 
         # Insert Route
         if db_routes.idx_route_exists(1) is False:
@@ -167,7 +167,7 @@ class _DBForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1000)
+            database.add(record, 1032)
 
         # Insert GeoRegions
         if db_georegions.idx_georegion_exists(1) is False:
@@ -176,7 +176,7 @@ class _DBForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1007)
+            database.add(record, 1038)
 
         # Insert AgentNames
         if db_agentnames.idx_agentname_exists(1) is False:
@@ -194,7 +194,7 @@ class _DBForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1009)
+            database.add(record, 1040)
 
 
 class _DBNonForeignTables(object):
@@ -244,7 +244,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1016)
+            database.add(record, 1046)
 
         # Insert GeoCities
         if db_geocities.idx_geocity_exists(1) is False:
@@ -253,7 +253,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1014)
+            database.add(record, 1051)
 
         # Insert Addresses
         if db_addresses.idx_address_exists(1) is False:
@@ -261,7 +261,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1019)
+            database.add(record, 1054)
 
         # Insert BillAddresses
         if db_billaddresses.idx_billaddress_exists(1) is False:
@@ -269,7 +269,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1020)
+            database.add(record, 1053)
 
         # Insert DeviceModel
         if db_devicemodels.idx_devicemodel_exists(1) is False:
@@ -278,7 +278,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1001)
+            database.add(record, 1033)
 
         # Insert VehicleModel
         if db_vehiclemodels.idx_vehiclemodel_exists(1) is False:
@@ -316,7 +316,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1005)
+            database.add(record, 1037)
 
         # Insert RiderDevice
         if db_riderdevices.idx_riderdevice_exists(1) is False:
@@ -345,7 +345,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1010)
+            database.add(record, 1041)
 
         # Insert DriverCompanyRatings
         if db_companyratings.idx_drivercompanyrating_exists(1) is False:
@@ -369,7 +369,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1013)
+            database.add(record, 1044)
 
         # Insert Agents
         if db_agents.idx_agent_exists(1) is False:
@@ -378,7 +378,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1023)
+            database.add(record, 1047)
 
         # Insert RiderDeviceAgents
         if db_riderdeviceagents.idx_riderdeviceagent_exists(1) is False:
@@ -386,7 +386,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1021)
+            database.add(record, 1029)
 
         # Insert DriverDeviceAgents
         if db_driverdeviceagents.idx_driverdeviceagent_exists(1) is False:
@@ -394,7 +394,7 @@ class _DBNonForeignTables(object):
                 enabled=0
             )
             database = db.Database()
-            database.add(record, 1022)
+            database.add(record, 1070)
 
 
 class _Database(object):
@@ -518,7 +518,7 @@ class _Configuration(object):
             log_message = (
                 'Configuration files found in {} is invalid'
                 ''.format(self.directories))
-            log.log2die_safe(1015, log_message)
+            log.log2die_safe(1069, log_message)
 
         # Update configuration file if required
         if len(updated_list) == updated_list.count(True):
