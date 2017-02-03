@@ -2,6 +2,7 @@
 
 # Standard imports
 from collections import defaultdict
+from pprint import pprint
 
 # PIP3 imports
 import requests
@@ -126,7 +127,7 @@ def _lastcontact_lookup(agent_name):
     datapointsummary = None
 
     # Get infoset datapoint information
-    uri = 'datapoints/all/summary'
+    uri = 'datapoints/all/summarylist'
     url = '{}/{}'.format(reference.infoset_api_url_prefix(CONFIG), uri)
     try:
         result = requests.get(url)
