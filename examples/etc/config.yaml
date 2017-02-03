@@ -11,6 +11,7 @@ main:
     infoset_server_port: 6000
     infoset_server_https: False
     infoset_server_uri: /infoset/api/v1
+    interval:60
     db_hostname: localhost
     db_username: mdl
     db_password: PASSWORD
