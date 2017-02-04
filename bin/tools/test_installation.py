@@ -44,7 +44,7 @@ class _APItest(object):
     def __init__(self,):
         """Function for intializing the class."""
         # Initialize key variables
-        self. agent_name = 'DoRoad'
+        self.agent_name = 'DoRoad'
         self.devicenames = ['+1 876-927-1680', '+1 876-927-1660']
         self.config = reference.ReferenceSampleConfig(self.agent_name)
 
@@ -142,7 +142,7 @@ class _APItest(object):
         lastcontacts = api.get(uri)
 
         # Get the datapoint summary
-        uri = ('/datapoints/all/summary')
+        uri = ('/datapoints/all/summarylist')
         datapointsummary = api.get(uri)
 
         # Create a lookup table for datapoints
