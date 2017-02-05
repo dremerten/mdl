@@ -11,7 +11,6 @@ Description:
 """
 # Standard libraries
 import os
-import tempfile
 from collections import defaultdict
 from copy import deepcopy
 import json
@@ -53,14 +52,18 @@ class ReferenceSampleConfig(Config):
             None
 
         Returns:
-            result: configured agent_cache_directory
+            directory: configured agent_cache_directory
 
         """
         # Initialize key variables
-        result = tempfile.mkdtemp(prefix=self.prefix)
+        directory = (
+            '/tmp/mdl_test_installation_agent_cache_{}'
+            ''.format(self.prefix))
+        if os.path.isdir(directory) is False:
+            os.makedirs(directory, mode=0o700)
 
         # Return
-        return result
+        return directory
 
     def agent_name(self):
         """Get agent_name.
