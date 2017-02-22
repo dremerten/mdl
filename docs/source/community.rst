@@ -27,7 +27,7 @@ Issue Tracking
 ==============
 
 Bug reports, enhancement requests and tasks generally go in the `Github
-issue tracker <https://github.com/PalisadoesFoundation/infoset-ng/issues>`_.
+issue tracker <https://github.com/PalisadoesFoundation/mdl/issues>`_.
 
 Security Issues
 ===============
