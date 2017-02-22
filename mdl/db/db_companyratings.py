@@ -39,7 +39,7 @@ class GetIDXDriverCompanyRatings(object):
         self.data_dict = defaultdict(dict)
         keys = [
             'idx_drivercompanyrating', 'rating_value', 'rating_timestamp',
-            'idx_company', 'enabled']
+            'idx_drivercompany', 'enabled']
         for key in keys:
             self.data_dict[key] = None
         self.data_dict['exists'] = False
@@ -63,7 +63,7 @@ class GetIDXDriverCompanyRatings(object):
                     self.data_dict[
                         'idx_drivercompanyrating'] = idx_drivercompanyrating
                     self.data_dict['rating_value'] = instance.rating_value
-                    self.data_dict['idx_company'] = instance.idx_company
+                    self.data_dict['idx_drivercompany'] = instance.idx_drivercompany
                     self.data_dict[
                         'rating_timestamp'] = instance.rating_timestamp
                     self.data_dict['enabled'] = bool(instance.enabled)
@@ -101,8 +101,8 @@ class GetIDXDriverCompanyRatings(object):
         value = self.data_dict['idx_drivercompanyrating']
         return value
 
-    def idx_company(self):
-        """Get idx_company value.
+    def idx_drivercompany(self):
+        """Get idx_drivercompany value.
 
         Args:
             None
@@ -112,7 +112,7 @@ class GetIDXDriverCompanyRatings(object):
 
         """
         # Initialize key variables
-        value = self.data_dict['idx_company']
+        value = self.data_dict['idx_drivercompany']
         return value
 
     def rating_timestamp(self):

@@ -1,12 +1,12 @@
 Best Practices
 ==============
 
-There are a number of best practices to consider when implementing ``infoset-ng``.
+There are a number of best practices to consider when implementing ``mdl``.
 
 Use a Web Proxy Server
 ----------------------
 
-``infoset-ng`` uses ``Gunicorn`` as lightweight webserver. The ``Gunicorn`` development team strongly recommends operating ``Gunicorn`` behind a proxy server.
+``mdl`` uses ``Gunicorn`` as lightweight webserver. The ``Gunicorn`` development team strongly recommends operating ``Gunicorn`` behind a proxy server.
 
 Nginx Configuration
 ~~~~~~~~~~~~~~~~~~~

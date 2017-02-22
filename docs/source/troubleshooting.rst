@@ -17,7 +17,7 @@ You can see these changes as they occur by using the ``tail -f`` command as seen
 
 ::
 
-    $ tail -f /opt/infoset-ng/log/infoset-ng.log
+    $ tail -f /opt/mdl/log/mdl.log
 
 The location of the log file is governed by the ``log_directory`` parameter in the configuration.
 
@@ -28,11 +28,11 @@ You can test the operation of the API by using the ``curl`` command which is oft
 
 ::
 
-    $ curl http://SERVER_IP:6000/infoset/api/v1.0
-    infoset-ng API Operational.
+    $ curl http://SERVER_IP:6000/mdl/api/v1.0
+    mdl API Operational.
     $
 
-The ``curl`` response should be ``infoset-ng API Operational`` if
+The ``curl`` response should be ``mdl API Operational`` if
 successful.
 
 Invalid Agents
@@ -55,7 +55,7 @@ You can see these changes as they occur by using the ``tail -f`` command as seen
 
 ::
 
-    $ tail -f /opt/infoset-ng/log/api-web.log
+    $ tail -f /opt/mdl/log/api-web.log
 
 The location of the log file is governed by the ``log_directory`` parameter in the configuration.
 
