@@ -116,15 +116,56 @@ def receive_rider():
         abort(404)
 
 
+@POST.route('/post/register/driver', methods=['POST'])
+def register_user():
+    """Function for handling /mdl/api/v1.0/mobile/post/register/user route.
+
+    Args:
+        None
+
+    Returns:
+        Text response if Received
+    """
+    # Initialize key variables
+    found_count = 0
+
+    # Get JSON from incoming agent POST
+    data = request.json
+    keys = [
+        'firstName', 'lastName', 'password',
+        'phone']
+    for key in keys:
+        if key in data:
+            found_count += 1
+        # Do processing
+    if found_count == 6:
+        agent_name = data['name']
+
+        # Fail if wrong agent
+        if agent_name != 'OneStop':
+            abort(404)
+
+        # Post data
+        success = _post_coordinate_data(data)
+
+        # Provide feedback
+        if success is True:
+            # Return
+            return 'OK'
+        else:
+            abort(404)
+    else:
+        abort(404)
+
+
 def _post_coordinate_data(data):
-    """Post coordinate data to infoset.
+    """ Post coordinate data to infoset.
 
     Args:
         data: Data dictionary to post
 
     Returns:
         Text response if Received
-
     """
     # Instantiate object to post data
     agent_name = data['name']
@@ -152,3 +193,24 @@ def _post_coordinate_data(data):
     # Post data
     success = report.post()
     return success
+
+
+def _register_driver_data(data):
+    """ Post driver data to infoset.
+
+    Args:
+        data: Data dictionary to post
+
+    Returns:
+        Text response if Received
+    """
+    agent_name = data['name']
+    firstName = data['firstName']
+    lastName = data['lastName']
+    password = data['password']
+    phone = data['phone']
+
+    # Setup the object to post data
+    config = reference.ReferenceSampleConfig(agent_name=agent_name)
+    report = reference.ReferenceSampleAgent(
+        config, devicename, id_agent, timestamp=timestamp)
