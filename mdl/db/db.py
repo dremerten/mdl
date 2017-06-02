@@ -4,8 +4,8 @@
 
 # mdl libraries
 from mdl.utils import log
-from mdl.db import POOL
 from mdl.db.db_orm import Drivers
+from mdl.db import POOL
 
 
 class Database(object):

@@ -5,6 +5,10 @@ from flask import Blueprint, request, abort
 
 # mdl imports
 from mdl.reference import reference
+from mdl.db.db_orm import Drivers
+from mdl.db.db import Database
+
+from mdl.utils import general
 
 # Define the POST global variable
 POST = Blueprint('POST', __name__)
@@ -116,9 +120,9 @@ def receive_rider():
         abort(404)
 
 
-@POST.route('/post/register/driver', methods=['POST'])
-def register_user():
-    """Function for handling /mdl/api/v1.0/mobile/post/register/user route.
+@POST.route('/post/register/driver', methods=['POST', 'GET'])
+def register_driver():
+    """Function for handling /mdl/api/v1/mobile/post/register/driver route.
 
     Args:
         None
@@ -132,8 +136,8 @@ def register_user():
     # Get JSON from incoming agent POST
     data = request.json
     keys = [
-        'firstName', 'lastName', 'password',
-        'phone']
+        'firstName', 'lastName', 'password', 'email',
+        'phone', 'utc_timestamp']
     for key in keys:
         if key in data:
             found_count += 1
@@ -146,7 +150,7 @@ def register_user():
             abort(404)
 
         # Post data
-        success = _post_coordinate_data(data)
+        success = _register_driver_data(data)
 
         # Provide feedback
         if success is True:
@@ -196,7 +200,7 @@ def _post_coordinate_data(data):
 
 
 def _register_driver_data(data):
-    """ Post driver data to infoset.
+    """ Post driver data to mdl database.
 
     Args:
         data: Data dictionary to post
@@ -204,13 +208,33 @@ def _register_driver_data(data):
     Returns:
         Text response if Received
     """
-    agent_name = data['name']
-    firstName = data['firstName']
-    lastName = data['lastName']
-    password = data['password']
-    phone = data['phone']
 
-    # Setup the object to post data
-    config = reference.ReferenceSampleConfig(agent_name=agent_name)
-    report = reference.ReferenceSampleAgent(
-        config, devicename, id_agent, timestamp=timestamp)
+    firstName = general.encode(data['firstName'])
+    lastName = general.encode(data['lastName'])
+    password = general.encode(data['password'])
+    email = general.encode(data['email'])
+    phone = general.encode(data['phone'])
+
+    database = Database()
+    session = database.session()
+
+    # create Driver object
+    record = Drivers(
+        first_name=firstName,
+        last_name=lastName,
+        password=password,
+        email=email,
+        enabled=0
+    )
+    # check if email exists
+    result = session.query(Drivers).filter(
+        Drivers.email == email)
+
+    if result.count() == 1:
+        # User exists
+        return False
+    elif result.count() == 0:
+        # User doesnt exist
+        database.add(record, 1008)
+        database.close()
+        return True

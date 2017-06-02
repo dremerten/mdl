@@ -14,9 +14,10 @@ from sqlalchemy import event
 from sqlalchemy import exc
 
 # mdl libraries
+
 from mdl.utils import configuration
 from mdl.utils import log
-from mdl.db import db_orm
+
 
 #############################################################################
 # Setup a global pool for database connections
