@@ -313,6 +313,7 @@ class _DBNonForeignTables(object):
                 first_name=general.encode(self.reserved),
                 last_name=general.encode(self.reserved),
                 password=general.encode(self.reserved),
+                email=general.encode(self.reserved),
                 enabled=0
             )
             database = db.Database()
