@@ -55,7 +55,6 @@ class _APItest(object):
         # Get infoset URI to process
         uri = 'mobile/get/coordinates/lastcontactdrivers'
         url = '{}/{}'.format(_mdl_api_url_prefix(self.config), uri)
-        print(url)
 
         try:
             result = requests.get(url)
