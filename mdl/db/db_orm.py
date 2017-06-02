@@ -12,6 +12,7 @@ from sqlalchemy.dialects.mysql import BIGINT, DATETIME, INTEGER, VARBINARY
 from sqlalchemy.dialects.mysql import FLOAT
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
+from sqlalchemy import String
 
 BASE = declarative_base()
 
@@ -24,7 +25,7 @@ class CreditCards(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_creditcard = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -48,7 +49,7 @@ class DriverCompanies(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_drivercompany = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -91,7 +92,7 @@ class CompanyCategories(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_companycategory = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -117,7 +118,7 @@ class DeviceMakes(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_devicemake = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -144,7 +145,7 @@ class DeviceModels(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_devicemodel = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -175,7 +176,7 @@ class Routes(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_route = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -201,7 +202,7 @@ class Riders(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_rider = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -231,7 +232,7 @@ class Drivers(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_driver = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -255,6 +256,8 @@ class Drivers(BASE):
     first_name = Column(VARBINARY(50), nullable=True, default=None)
 
     last_name = Column(VARBINARY(50), nullable=True, default=None)
+
+    email = Column(String(50), nullable=False)
 
     password = Column(VARBINARY(512), nullable=True, default=None)
 
@@ -281,7 +284,7 @@ class RiderDevices(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_riderdevice = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -318,7 +321,7 @@ class DriverDevices(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_driverdevice = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -363,7 +366,7 @@ class Vehicles(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_vehicle = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -400,7 +403,7 @@ class VehicleCategories(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_vehiclecategory = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -431,7 +434,7 @@ class VehicleMakes(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_vehiclemake = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -458,7 +461,7 @@ class VehicleModels(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_vehiclemodel = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -490,7 +493,7 @@ class DriverCompanyRatings(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_drivercompanyrating = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -525,7 +528,7 @@ class VehicleRatings(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_vehiclerating = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -560,7 +563,7 @@ class DriverRatings(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_driverrating = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -594,7 +597,7 @@ class GeoRegions(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_georegion = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -621,7 +624,7 @@ class GeoCountries(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_geocountry = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -653,7 +656,7 @@ class GeoCities(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_geocity = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -684,7 +687,7 @@ class Addresses(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_address = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -713,7 +716,7 @@ class BillAddresses(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_billaddress = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -744,7 +747,7 @@ class RiderDeviceAgents(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_riderdeviceagent = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -778,7 +781,7 @@ class DriverDeviceAgents(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_driverdeviceagent = Column(
         BIGINT(unsigned=True), primary_key=True,
@@ -865,7 +868,7 @@ class Configurations(BASE):
         {
             'mysql_engine': 'InnoDB'
         }
-        )
+    )
 
     idx_configuration = Column(
         BIGINT(unsigned=True), primary_key=True,
