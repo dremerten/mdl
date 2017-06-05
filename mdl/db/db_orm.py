@@ -212,6 +212,8 @@ class Riders(BASE):
 
     last_name = Column(VARBINARY(50), nullable=True, default=None)
 
+    email = Column(String(50), nullable=False)
+
     password = Column(VARBINARY(512), nullable=True, default=None)
 
     enabled = Column(INTEGER(unsigned=True), server_default='1')

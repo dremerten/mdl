@@ -5,7 +5,7 @@ from flask import Blueprint, request, abort
 
 # mdl imports
 from mdl.reference import reference
-from mdl.db.db_orm import Drivers
+from mdl.db.db_orm import Drivers, Riders
 from mdl.db.db import Database
 
 from mdl.utils import general
@@ -164,7 +164,7 @@ def register_driver():
 
 @POST.route('/post/login/driver', methods=['POST', 'GET'])
 def login_driver():
-    """Function for handling /mdl/api/v1/mobile/post/register/driver route.
+    """Function for handling /mdl/api/v1/mobile/post/login/driver route.
 
     Args:
         None
@@ -172,6 +172,47 @@ def login_driver():
     Returns:
         Text response if Received
     """
+    # Initialize key variables
+    found_count = 0
+
+    # Get JSON from incoming agent POST
+    data = request.json
+    keys = ['email', 'password']
+    for key in keys:
+        if key in data:
+            found_count += 1
+        # Do processing
+    if found_count == 2:
+        agent_name = data['name']
+
+        # Fail if wrong agent
+        if agent_name != 'OneStop':
+            abort(404)
+
+        # Post data
+        success = _login_driver_data(data)
+
+        # Provide feedback
+        if success is True:
+            # Return
+            return 'OK'
+        else:
+            abort(404)
+    else:
+        abort(404)
+
+
+@POST.route('/post/register/rider', methods=['POST', 'GET'])
+def register_rider():
+    """Function for handling /mdl/api/v1/mobile/post/register/rider route.
+
+    Args:
+        None
+
+    Returns:
+        Text response if Received
+    """
+
     # Initialize key variables
     found_count = 0
 
@@ -192,7 +233,7 @@ def login_driver():
             abort(404)
 
         # Post data
-        success = _login_driver_data(data)
+        success = _register_rider_data(data)
 
         # Provide feedback
         if success is True:
@@ -301,6 +342,75 @@ def _login_driver_data(data):
     # check if email exists
     result = session.query(Drivers).filter(
         Drivers.email == email)
+
+    if result.count() == 1:
+        # User exists
+        return True
+    elif result.count() == 0:
+        # User doesnt exist
+        return False
+
+
+def _register_rider_data(data):
+    """ Post rider data to mdl database.
+
+    Args:
+        data: Data dictionary to post
+
+    Returns:
+        Text response if Received
+    """
+
+    firstName = general.encode(data['firstName'])
+    lastName = general.encode(data['lastName'])
+    password = general.encode(data['password'])
+    email = general.encode(data['email'])
+    phone = general.encode(data['phone'])
+
+    database = Database()
+    session = database.session()
+
+    # create Riders object
+    record = Riders(
+        first_name=firstName,
+        last_name=lastName,
+        password=password,
+        email=email,
+        enabled=0
+    )
+    # check if email exists
+    result = session.query(Riders).filter(
+        Riders.email == email)
+
+    if result.count() == 1:
+        # User exists
+        return False
+    elif result.count() == 0:
+        # User doesnt exist
+        database.add(record, 1008)
+        database.close()
+        return True
+
+
+def _login_rider_data(data):
+    """ Check rider data against database.
+
+    Args:
+        data: Data dictionary to post
+
+    Returns:
+        Text response if Received
+    """
+
+    password = general.encode(data['password'])
+    email = general.encode(data['email'])
+
+    database = Database()
+    session = database.session()
+
+    # check if email exists
+    result = session.query(Riders).filter(
+        Riders.email == email)
 
     if result.count() == 1:
         # User exists
