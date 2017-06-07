@@ -1,0 +1,19 @@
+main:
+  bind_port: 3000
+  db_hostname: localhost
+  db_name: mdl_ng
+  db_password: password
+  db_username: root
+  mdl_server_url: /mdl/api/v1
+  infoset_server_https: false
+  infoset_server_name: 0.0.0.0
+  infoset_server_port: 6000
+  infoset_server_uri: /infoset/api/v1
+  interval: 60
+  listen_address: 0.0.0.0
+  log_directory: /home/proxima/Dev/github/mdl/log
+  log_level: debug
+  memcached_hostname: localhost
+  memcached_port: 11211
+  sqlalchemy_max_overflow: 10
+  sqlalchemy_pool_size: 10

@@ -245,6 +245,46 @@ def register_rider():
         abort(404)
 
 
+@POST.route('/post/login/rider', methods=['POST', 'GET'])
+def login_rider():
+    """Function for handling /mdl/api/v1/mobile/post/login/rider route.
+
+    Args:
+        None
+
+    Returns:
+        Text response if Received
+    """
+    # Initialize key variables
+    found_count = 0
+
+    # Get JSON from incoming agent POST
+    data = request.json
+    keys = ['email', 'password']
+    for key in keys:
+        if key in data:
+            found_count += 1
+        # Do processing
+    if found_count == 2:
+        agent_name = data['name']
+
+        # Fail if wrong agent
+        if agent_name != 'OneStop':
+            abort(404)
+
+        # Post data
+        success = _login_rider_data(data)
+
+        # Provide feedback
+        if success is True:
+            # Return
+            return 'OK'
+        else:
+            abort(404)
+    else:
+        abort(404)
+
+
 def _post_coordinate_data(data):
     """ Post coordinate data to infoset.
 
