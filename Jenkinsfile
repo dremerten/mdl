@@ -34,7 +34,7 @@ pipeline {
             steps{
                 echo 'Deploying....'
                 sh 'cp -r * /home/luke/mdl'
-                sh 'cd /home/luke/mdl && python3 server.py'
+                sh 'cd /home/luke/mdl && nohup python3 server.py &'
             }
         }
     }
