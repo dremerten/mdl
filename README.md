@@ -47,3 +47,21 @@ To login a driver to application, send a POST to `http://nylon.palisadoes.org:30
   "password": "hashedpasswerd"
   }
 ```
+
+# Testing POST and GET coordinates to/from mdl
+
+`mdl` has a small script in `bin/tools` to test both `infoset` POST and `mdl` POST
+
+Tests getting data from infoset
+
+```bash
+  $ ./bin/tools/test_installation.py infoset --get
+```
+
+Tests getting data from mdl
+
+```bash
+  $ ./bin/tools/test_installation.py mdl --get
+```
+
+Run `./bin/tools/test_installation mdl -h` for more information.
