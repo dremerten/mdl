@@ -1,4 +1,19 @@
-# mdl
+# mdl (middleware)
+
+Middleware uses `infosetdb` to store GPS coordinates of devices (mobile) for [one-stop](https://github.com/PalisadoesFoundation/one-stop) and [do-road](https://github.com/PalisadoesFoundation/do-road)
+
+# Routes
+
+All routes are prefixed with `/mdl/api/v1/mobile`. eg `localhost:3000/mdl/api/v1/mobile` + any route below.
+| Config Options                       | Description                                  |Full Route                                              |
+| -------------------------------------|----------------------------------------------|--------------------------------------------------------|
+| `/post/register/driver`              | Register Driver                              |`/mdl/api/v1/mobile/post/register/driver`               |
+| `/post/login/driver`                 | Login Driver                                 |`/mdl/api/v1/mobile/post/login/driver`                  |
+| `/post/register/rider`               | Register Rider                               |`/mdl/api/v1/mobile/post/register/rider`                |
+| `/post/login/rider`                  | Login Rider                                  |`/mdl/api/v1/mobile/post/login/rider`                   |
+| `/get/coordinates/lastcontactdrivers`| Gets list of last contacted drivers          | `/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers`|
+| `/get/coordinates/lastcontactriders` | Gets list of last contacted riders/passengers| `/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers`|
+
 
 # Register Driver
 To register a driver in the database, send a POST to `http://nylon.palisadoes.org:3000/mdl/api/v1/mobile/post/register/driver` with the following JSON data packet structure.
@@ -47,21 +62,3 @@ To login a driver to application, send a POST to `http://nylon.palisadoes.org:30
   "password": "hashedpasswerd"
   }
 ```
-
-# Testing POST and GET coordinates to/from mdl
-
-`mdl` has a small script in `bin/tools` to test both `infoset` POST and `mdl` POST
-
-Tests getting data from infoset
-
-```bash
-  $ ./bin/tools/test_installation.py infoset --get
-```
-
-Tests getting data from mdl
-
-```bash
-  $ ./bin/tools/test_installation.py mdl --get
-```
-
-Run `./bin/tools/test_installation mdl -h` for more information.
