@@ -146,7 +146,7 @@ def register_driver():
         agent_name = data['name']
 
         # Fail if wrong agent
-        if agent_name != 'OneStop':
+        if agent_name != 'DoRoad':
             abort(404)
 
         # Post data
@@ -186,7 +186,7 @@ def login_driver():
         agent_name = data['name']
 
         # Fail if wrong agent
-        if agent_name != 'OneStop':
+        if agent_name != 'DoRoad':
             abort(404)
 
         # Post data
