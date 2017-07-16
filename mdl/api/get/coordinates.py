@@ -134,12 +134,11 @@ def _lastcontact_lookup(agent_name):
         datapointsummary = result.json()
     except:
         datapointsummary = None
-
     # Create a lookup table for datapoints
     if bool(datapointsummary) is True:
         for item in datapointsummary:
             # Only process the desired agent
-            if item['name'] != agent_name:
+            if item['agent'] != agent_name:
                 continue
 
             # Append data
