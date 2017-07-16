@@ -27,7 +27,9 @@ To register a driver in the database, send a POST to `http://nylon.palisadoes.or
   "email": "sample@email.com",
   "password": "hashedpasswerd",
   "phone": "8765555555",
-  "utc_timestamp":"14000000"
+  "utc_timestamp":"14000000",
+  "name": "DoRoad"
+
   }
 ```
 
@@ -37,7 +39,8 @@ To login a driver to application, send a POST to `http://nylon.palisadoes.org:30
 ```javascript
 {
   "email": "sample@email.com",
-  "password": "hashedpasswerd"
+  "password": "hashedpasswerd",
+  "name": "DoRoad"
   }
 ```
 
@@ -51,7 +54,8 @@ To register a driver in the database, send a POST to `http://nylon.palisadoes.or
   "email": "sample@email.com",
   "password": "hashedpasswerd",
   "phone": "8765555555",
-  "utc_timestamp":"14000000"
+  "utc_timestamp":"14000000",
+  "name": "OneStop"
   }
 ```
 
@@ -61,6 +65,7 @@ To login a driver to application, send a POST to `http://nylon.palisadoes.org:30
 ```javascript
 {
   "email": "sample@email.com",
-  "password": "hashedpasswerd"
+  "password": "hashedpasswerd",
+  "name": "OneStop"
   }
 ```
