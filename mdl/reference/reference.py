@@ -160,6 +160,7 @@ class ReferenceSampleAPI(object):
         url = self._url(uri)
         try:
             result = requests.post(url, json=data)
+            print(data)
             response = True
         except:
             response = False
