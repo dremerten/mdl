@@ -5,14 +5,16 @@ Middleware uses `infosetdb` to store GPS coordinates of devices (mobile) for [on
 # Routes
 
 All routes are prefixed with `/mdl/api/v1/mobile`. eg `localhost:3000/mdl/api/v1/mobile` + any route below.
-| Config Options                       | Description                                  |Full Route                                              |
-| -------------------------------------|----------------------------------------------|--------------------------------------------------------|
-| `/post/register/driver`              | Register Driver                              |`/mdl/api/v1/mobile/post/register/driver`               |
-| `/post/login/driver`                 | Login Driver                                 |`/mdl/api/v1/mobile/post/login/driver`                  |
-| `/post/register/rider`               | Register Rider                               |`/mdl/api/v1/mobile/post/register/rider`                |
-| `/post/login/rider`                  | Login Rider                                  |`/mdl/api/v1/mobile/post/login/rider`                   |
-| `/get/coordinates/lastcontactdrivers`| Gets list of last contacted drivers          | `/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers`|
-| `/get/coordinates/lastcontactriders` | Gets list of last contacted riders/passengers| `/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers`|
+
+
+| Description                                  |Full Route                |
+|----------------------------------------------|--------------------------------------------------------|
+| Register Driver                              |`/mdl/api/v1/mobile/post/register/driver`               |
+| Login Driver                                 |`/mdl/api/v1/mobile/post/login/driver`                  |
+| Register Rider                               |`/mdl/api/v1/mobile/post/register/rider`                |
+| Login Rider                                  |`/mdl/api/v1/mobile/post/login/rider`                   |
+| Gets list of last contacted drivers          | `/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers`|
+| Gets list of last contacted riders/passengers| `/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers`|
 
 
 # Register Driver
