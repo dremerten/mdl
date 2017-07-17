@@ -13,8 +13,10 @@ All routes are prefixed with `/mdl/api/v1/mobile`. eg `localhost:3000/mdl/api/v1
 | Login Driver                                 |`/mdl/api/v1/mobile/post/login/driver`                  |
 | Register Rider                               |`/mdl/api/v1/mobile/post/register/rider`                |
 | Login Rider                                  |`/mdl/api/v1/mobile/post/login/rider`                   |
-| Gets list of last contacted drivers          | `/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers`|
-| Gets list of last contacted riders/passengers| `/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers`|
+| Post Driver GPS coordinates                  |`/mdl/api/v1/mobile/post/drivercoordinates`             |
+| Post Rider GPS coordinates                   |`/mdl/api/v1/mobile//post/ridercoordinates`             |
+| Gets list of last contacted drivers          |`/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers` |
+| Gets list of last contacted riders/passengers|`/mdl/api/v1/mobile/get/coordinates/lastcontactdrivers` |
 
 
 # Register Driver
